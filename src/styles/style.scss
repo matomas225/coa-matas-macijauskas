@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "circular-black";
+  src: url("/src/assets/fonts/circular-black.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "circular-bold";
+  src: url("/src/assets/fonts/circular-bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "circular-medium";
+  src: url("/src/assets/fonts/circular-medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "circular-light";
+  src: url("/src/assets/fonts/circular-light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+html {
+  font-family: "circular-medium";
+}
