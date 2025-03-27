@@ -1,37 +1,34 @@
 import React from "react";
-import styled from "styled-components";
 import NavItem from "./NavItem";
 import { routes } from "@utils/routes";
+import "./Navigation.scss";
 
-const Wrapper = styled.header`
-  background-color: black;
-  padding: 20px 10px;
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: end;
-`;
-
-const UnsortedList = styled.ul`
-  margin: 0;
-  padding: 0;
-  display: flex;
-  list-style-type: none;
-`;
+const navigationItems = [
+  {
+    route: routes.home,
+    name: "Home",
+  },
+  {
+    route: routes.home,
+    name: "About",
+  },
+  {
+    route: routes.home,
+    name: "Contact",
+  },
+];
 
 const Navigation: React.FC = () => {
-  console.log(routes.home);
   return (
-    <Wrapper>
-      <Nav>
-        <UnsortedList>
-          <NavItem route={routes.home} name="Home" />
-          <NavItem route="/" name="About" />
-          <NavItem route="/" name="Contact" />
-        </UnsortedList>
-      </Nav>
-    </Wrapper>
+    <header>
+      <nav>
+        <ul>
+          {navigationItems.map((item, i) => (
+            <NavItem key={i + 1} route={item.route} name={item.name} />
+          ))}
+        </ul>
+      </nav>
+    </header>
   );
 };
 

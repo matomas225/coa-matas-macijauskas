@@ -25,6 +25,7 @@
     /* Path Alias Configuration */
     "baseUrl": "./src", // Make sure this points to the 'src' folder
     "paths": {
+      "@/*": ["src/*"],
       "@utils/*": ["utils/*"]
     }
   },
