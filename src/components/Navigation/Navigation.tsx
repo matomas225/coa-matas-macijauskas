@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import NavItem from "./NavItem";
-//@ts-ignore Note: for now ignore needs more setup but it works!
-import { routes } from "@routes";
+import { routes } from "@utils/routes";
 
 const Wrapper = styled.header`
   background-color: black;
