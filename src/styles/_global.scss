@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 @font-face {
   font-family: "circular-black";
   src: url("/src/assets/fonts/circular-black.ttf") format("truetype");
@@ -28,4 +30,18 @@
 
 html {
   font-family: "circular-medium";
+  color: $textPrimary;
+}
+
+body {
+  background-color: $bgDark;
+}
+
+//reset heading-text style
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
 }

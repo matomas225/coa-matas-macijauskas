@@ -23,10 +23,10 @@
     "noUncheckedSideEffectImports": true,
 
     /* Path Alias Configuration */
-    "baseUrl": "./src", // Make sure this points to the 'src' folder
+    "baseUrl": ".", // Make sure this points to the 'src' folder
     "paths": {
       "@/*": ["src/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["src/utils/*"]
     }
   },
 

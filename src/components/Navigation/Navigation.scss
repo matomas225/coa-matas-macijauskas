@@ -1,6 +1,6 @@
 header {
-  background-color: black;
-  padding: 20px 10px;
+  background-color: $black;
+  padding: 25px 10px;
 }
 
 nav {
@@ -25,9 +25,9 @@ li {
 
 .navlink {
   text-decoration: none;
-  color: #b3b3b3;
+  color: $textGrey;
 
   &:hover {
-    color: white;
+    color: $textPrimary;
   }
 }
