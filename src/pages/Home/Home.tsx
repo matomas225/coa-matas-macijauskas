@@ -2,14 +2,22 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Home.scss";
 
+type User = {
+  _id: string;
+  age: number;
+  lastName: string;
+  movies: string[];
+  name: string;
+};
+
 const Home: React.FC = () => {
-  const [items, setItems] = useState<string[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const fetchTestData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/data");
-      setItems(response.data.data);
+      const response = await axios.get("http://localhost:3000/getUsers");
+      setUsers(response.data);
     } catch (err) {
       setError("Error while fetching data");
     }
@@ -24,9 +32,9 @@ const Home: React.FC = () => {
       <h1>Home Page</h1>
       {error && <p>{error}</p>}
       <div className="items">
-        {items && <p>Data From Backend:</p>}
-        {items.map((item, i) => {
-          return <p key={i + 1}>{item}</p>;
+        {users && <p>Data From Backend:</p>}
+        {users.map((user, i) => {
+          return <p key={i + 1}>{user.name}</p>;
         })}
       </div>
     </>

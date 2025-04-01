@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import Navigation from "./Navigation";
 import { MemoryRouter } from "react-router-dom";
+import Navigation from "./Navigation";
 
 describe("Navigation Component", () => {
-  test("renders navigation inner elements", () => {
+  it("renders navigation inner elements", () => {
     render(
       <MemoryRouter>
         <Navigation />

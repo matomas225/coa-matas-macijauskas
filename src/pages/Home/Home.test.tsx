@@ -1,11 +1,9 @@
-import "@testing-library/jest-dom";
-
 import { render, screen } from "@testing-library/react";
 import Home from "./Home";
 import { MemoryRouter } from "react-router-dom";
 
 describe("Home Component", () => {
-  test("renders the home page title", () => {
+  it("renders the home page title", () => {
     render(
       <MemoryRouter>
         <Home />
