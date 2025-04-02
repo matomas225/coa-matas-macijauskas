@@ -1,0 +1,17 @@
+.a-container {
+  margin-bottom: 10px;
+
+  a {
+    display: flex;
+    justify-content: center;
+    color: #ff9900; /* Set the text color to match the button */
+    text-decoration: none; /* Remove underline */
+    font-size: 14px;
+    text-align: center;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+  }
+
+  a:hover {
+    color: #e68a00; /* Darken the color on hover */
+  }
+}

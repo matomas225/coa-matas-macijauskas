@@ -1,0 +1,21 @@
+.button-container {
+  button {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9900;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #e68a00; /* Darken button on hover */
+  }
+
+  button:focus {
+    outline: none; /* Remove focus outline on the button */
+  }
+}

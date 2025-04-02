@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Home.scss";
+import { apiPaths } from "@/services/api";
 
 type User = {
   _id: string;
@@ -16,7 +17,7 @@ const Home: React.FC = () => {
 
   const fetchTestData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/getUsers");
+      const response = await axios.get(apiPaths.getUsers);
       setUsers(response.data);
     } catch (err) {
       setError("Error while fetching data");
@@ -34,7 +35,7 @@ const Home: React.FC = () => {
       <div className="items">
         {users && <p>Data From Backend:</p>}
         {users.map((user, i) => {
-          return <p key={i + 1}>{user.name}</p>;
+          return <p key={i + 1}>{user.name},</p>;
         })}
       </div>
     </>

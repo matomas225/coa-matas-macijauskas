@@ -9,12 +9,8 @@ const navigationItems = [
     name: "Home",
   },
   {
-    route: routes.home,
-    name: "About",
-  },
-  {
-    route: routes.home,
-    name: "Contact",
+    route: routes.auth,
+    name: "Login",
   },
 ];
 
