@@ -5,14 +5,14 @@
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #ff9900;
-    color: white;
+    background-color: $accentColor;
+    color: $textPrimary;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   button:hover {
-    background-color: #e68a00; /* Darken button on hover */
+    background-color: $accentColorDarker; /* Darken button on hover */
   }
 
   button:focus {

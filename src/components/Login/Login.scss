@@ -8,14 +8,14 @@
   h1 {
     text-align: center;
     font-size: 2rem;
-    color: #ff9900; /* Slightly lighter color */
+    color: $accentColor; /* Slightly lighter color */
   }
 
   form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #ffffff; /* White background for better contrast */
+    background-color: $bgWhite; /* White background for better contrast */
     padding: 30px;
     border-radius: 12px;
     width: 100%;

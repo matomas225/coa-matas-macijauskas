@@ -4,7 +4,7 @@
   a {
     display: flex;
     justify-content: center;
-    color: #ff9900; /* Set the text color to match the button */
+    color: $accentColor; /* Set the text color to match the button */
     text-decoration: none; /* Remove underline */
     font-size: 14px;
     text-align: center;
@@ -12,6 +12,6 @@
   }
 
   a:hover {
-    color: #e68a00; /* Darken the color on hover */
+    color: $accentColorDarker; /* Darken the color on hover */
   }
 }
