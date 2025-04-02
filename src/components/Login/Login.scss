@@ -1,0 +1,25 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff9900; /* Slightly lighter color */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff; /* White background for better contrast */
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px; /* Limiting width for better design */
+    margin-top: 20px; /* Adjusting margin to center in viewport */
+  }
+}
