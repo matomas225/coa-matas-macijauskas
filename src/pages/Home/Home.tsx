@@ -20,7 +20,7 @@ const Home: React.FC = () => {
       const response = await axios.get(apiPaths.getUsers);
       setUsers(response.data);
     } catch (err) {
-      setError("Error while fetching data");
+      setError(`Error while fetching data: ${err}`);
     }
   };
 
