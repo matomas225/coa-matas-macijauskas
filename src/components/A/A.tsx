@@ -4,12 +4,15 @@ import "./A.scss";
 type AProps = {
   href: string;
   value: string;
+  onClick?: () => void;
 };
 
-export const A: React.FC<AProps> = ({ href, value }) => {
+export const A: React.FC<AProps> = ({ href, value, onClick = () => null }) => {
   return (
     <div className="a-container">
-      <a href={href}>{value}</a>
+      <a onClick={onClick} href={href}>
+        {value}
+      </a>
     </div>
   );
 };
