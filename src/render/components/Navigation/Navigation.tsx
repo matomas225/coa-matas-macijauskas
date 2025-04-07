@@ -1,7 +1,7 @@
 import React from "react";
 import NavItem from "./NavItem";
 import { routes } from "@utils/routes";
-import "./Navigation.scss";
+import "@styles/components/Navigation/Navigation.scss";
 
 const navigationItems = [
   {

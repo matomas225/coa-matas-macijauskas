@@ -26,9 +26,16 @@
     "baseUrl": ".", // Make sure this points to the 'src' folder
     "paths": {
       "@/*": ["src/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"],
+      "@render/*": ["src/render/*"]
     }
   },
 
-  "include": ["src", "vitest.d.ts"]
+  "include": [
+    "src",
+    "vitest.d.ts",
+    "src/render/components",
+    "src/render/elements"
+  ]
 }

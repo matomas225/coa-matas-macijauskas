@@ -10,13 +10,15 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src"), // Set up the alias
       "@utils": path.resolve(__dirname, "src/utils"),
+      "@styles": path.resolve(__dirname, "src/styles"),
+      "@render": path.resolve(__dirname, "src/render"),
     },
   },
   plugins: [react()],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/variables.scss" as *; @use "@/styles/mixins.scss" as *; @use "@/styles/global.scss" as *;`, // Automatically import global SCSS files
+        additionalData: `@use "@/styles/global/variables.scss" as *; @use "@/styles/global/mixins.scss" as *; @use "@/styles/global/global.scss" as *;`, // Automatically import global SCSS files
       },
     },
   },

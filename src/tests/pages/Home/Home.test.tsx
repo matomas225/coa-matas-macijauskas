@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Home from "./Home";
+import Home from "@render/pages/Home/Home";
 import { MemoryRouter } from "react-router-dom";
 
 describe("Home Component", () => {

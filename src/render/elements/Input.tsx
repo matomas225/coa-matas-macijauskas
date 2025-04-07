@@ -1,5 +1,5 @@
 import React from "react";
-import "./Input.scss";
+import "@styles/elements/elements.scss";
 
 type InputProps = {
   type: string;

@@ -1,11 +1,11 @@
 import React from "react";
-import "./Login.scss";
-import { Button } from "../Button/Button";
-import { Label } from "../Label/Label";
-import { Input } from "../Input/Input";
-import { A } from "../A/A";
 import { useAppDispatch } from "@/hooks/reduxHooks";
-import { changeValue } from "@/pages/Auth/authSlice";
+import { changeValue } from "@/render/pages/Auth/authSlice";
+import { Button } from "@render/elements/Button";
+import { Label } from "@render/elements/Label";
+import { Input } from "@render/elements/Input";
+import { A } from "@render/elements/A";
+import "@styles/components/Login/Login.scss";
 
 export const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const LoginForm: React.FC = () => {
     <div className="form-container">
       <h1>Login</h1>
       <form>
-        <Label htmlFor="username" value="Username" />
+        <Label htmlFor="username">Username</Label>
         <Input
           type="text"
           id="username"
@@ -22,7 +22,7 @@ export const LoginForm: React.FC = () => {
           placeholder="Enter your username"
           required
         />
-        <Label htmlFor="password" value="Password" />
+        <Label htmlFor="password">Password</Label>
         <Input
           type="password"
           id="password"
@@ -30,13 +30,11 @@ export const LoginForm: React.FC = () => {
           placeholder="Enter your password"
           required
         />
-        <A
-          href="#"
-          onClick={() => dispatch(changeValue(false))}
-          value="Don't have an account ?"
-        />
-        <A href="#" value="Forgot password ?" />
-        <Button type="submit" value="Login" />
+        <A href="#" onClick={() => dispatch(changeValue(false))}>
+          Don't have an account ?
+        </A>
+        <A href="#"> Forgot password ?</A>
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );

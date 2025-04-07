@@ -1,5 +1,5 @@
-import { LoginForm } from "@/components/Login/LoginForm";
-import { Register } from "@/components/Register/Register";
+import { LoginForm } from "@render/components/Login/LoginForm";
+import { Register } from "@render/components/Register/Register";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import React from "react";
 import { changeValue, getFormState } from "./authSlice";
