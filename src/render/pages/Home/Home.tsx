@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./Home.scss";
 import { apiPaths } from "@/services/api";
+import "@styles/pages/Home/Home.scss";
 
 type User = {
   _id: string;

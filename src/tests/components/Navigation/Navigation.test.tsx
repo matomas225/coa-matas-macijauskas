@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import Navigation from "./Navigation";
+import Navigation from "@render/components/Navigation/Navigation";
 
 describe("Navigation Component", () => {
   it("renders navigation inner elements", () => {

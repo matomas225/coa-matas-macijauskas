@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import NotFound from "./pages/NotFound/NotFound";
-import Navigation from "@/components/Navigation/Navigation.tsx";
+import Home from "./render/pages/Home/Home";
+import NotFound from "./render/pages/NotFound/NotFound";
+import Navigation from "@/render/components/Navigation/Navigation";
 import { routes } from "./utils/routes";
-import Auth from "./pages/Auth/Auth";
+import Auth from "./render/pages/Auth/Auth";
 
 const App: React.FC = () => {
   return (
