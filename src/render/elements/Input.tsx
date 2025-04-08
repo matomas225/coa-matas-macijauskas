@@ -1,4 +1,5 @@
 import React from "react";
+import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
 import "@styles/elements/elements.scss";
 
 type InputProps = {
@@ -7,6 +8,8 @@ type InputProps = {
   name: string;
   placeholder?: string;
   required?: boolean;
+  register?: UseFormRegister<FieldValues>;
+  rules?: RegisterOptions;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -15,10 +18,13 @@ export const Input: React.FC<InputProps> = ({
   name,
   placeholder = "",
   required = false,
+  register = () => undefined,
+  rules = {},
 }) => {
   return (
     <div className="input-container">
       <input
+        {...register(name, { ...rules })}
         type={type}
         id={id}
         name={name}

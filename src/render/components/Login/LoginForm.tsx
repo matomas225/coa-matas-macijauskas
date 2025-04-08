@@ -2,9 +2,8 @@ import React from "react";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { changeValue } from "@/render/pages/Auth/authSlice";
 import { Button } from "@render/elements/Button";
-import { Label } from "@render/elements/Label";
-import { Input } from "@render/elements/Input";
 import { A } from "@render/elements/A";
+import { InputWithLabel } from "@render/components/InputWithLabel/InputWithLabel";
 import "@styles/components/Login/Login.scss";
 
 export const LoginForm: React.FC = () => {
@@ -14,22 +13,26 @@ export const LoginForm: React.FC = () => {
     <div className="form-container">
       <h1>Login</h1>
       <form>
-        <Label htmlFor="username">Username</Label>
-        <Input
+        <InputWithLabel
+          htmlFor="username"
           type="text"
           id="username"
           name="username"
           placeholder="Enter your username"
           required
-        />
-        <Label htmlFor="password">Password</Label>
-        <Input
+        >
+          Username
+        </InputWithLabel>
+        <InputWithLabel
+          htmlFor="password"
           type="password"
           id="password"
           name="password"
           placeholder="Enter your password"
           required
-        />
+        >
+          Password
+        </InputWithLabel>
         <A href="#" onClick={() => dispatch(changeValue(false))}>
           Don't have an account ?
         </A>
