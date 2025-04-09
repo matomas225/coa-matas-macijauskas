@@ -1,5 +1,12 @@
 import React from "react";
-import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
+import {
+  FieldError,
+  FieldErrorsImpl,
+  FieldValues,
+  Merge,
+  RegisterOptions,
+  UseFormRegister,
+} from "react-hook-form";
 import "@styles/elements/elements.scss";
 
 type InputProps = {
@@ -10,6 +17,7 @@ type InputProps = {
   required?: boolean;
   register?: UseFormRegister<FieldValues>;
   rules?: RegisterOptions;
+  error?: string;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -20,10 +28,12 @@ export const Input: React.FC<InputProps> = ({
   required = false,
   register = () => undefined,
   rules = {},
+  error = undefined,
 }) => {
   return (
     <div className="input-container">
       <input
+        className={error && "input-error"}
         {...register(name, { ...rules })}
         type={type}
         id={id}
@@ -31,6 +41,7 @@ export const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         required={required}
       />
+      {error && <div className="error-container">{error}</div>}
     </div>
   );
 };
