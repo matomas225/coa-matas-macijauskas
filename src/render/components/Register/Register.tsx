@@ -2,93 +2,72 @@ import React from "react";
 import { Label } from "../../elements/Label";
 import { Input } from "../../elements/Input";
 import { Button } from "../../elements/Button";
-import "@styles/components/Register/Register.scss";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { validationPatterns } from "@/utils/validation";
-//TODO: make validation rules cleaner maybe think of a way to move them out of the component and just import them
-//TODO: add translations to locales
+import { useFormWithErrorHandling } from "@/hooks/useForm";
+import { registerFormRules } from "./registerFormRules";
+import "@styles/components/Register/Register.scss";
+
 export const Register: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-  } = useForm();
+  const { register, handleSubmit, getValues, getErrorMessage } =
+    useFormWithErrorHandling();
+
+  const formRules = registerFormRules(getValues);
 
   const { t } = useTranslation();
-  console.log(errors);
+
   return (
     <div className="form-register">
-      <h1>{t("test")}</h1>
+      <h1>{t("register.register")}</h1>
       <form
         onSubmit={handleSubmit((data) => {
           console.log(data);
         })}
       >
-        <Label htmlFor="username">Username</Label>
+        <Label htmlFor="username">{t("register.username")}</Label>
         <Input
-          rules={{ required: "Username is required" }}
+          error={getErrorMessage("username")}
+          rules={formRules.username}
           register={register}
           type="text"
           id="username"
           name="username"
-          placeholder="Enter a username"
+          placeholder={t("register.placeholders.username")}
           required
         />
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{t("register.email")}</Label>
         <Input
-          rules={{
-            required: "Email is required",
-            pattern: {
-              value: validationPatterns.email,
-              message: "Please enter a valid email",
-            },
-          }}
+          error={getErrorMessage("email")}
+          rules={formRules.email}
           register={register}
           type="email"
           id="email"
           name="email"
-          placeholder="Enter your email: example@gmail.com"
+          placeholder={t("register.placeholders.email")}
           required
         />
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">{t("register.password")}</Label>
         <Input
-          rules={{
-            required: "Password is required",
-            minLength: {
-              value: 8,
-              message: "Password must be at least 8 characters long.",
-            },
-          }}
+          rules={formRules.password}
+          error={getErrorMessage("password")}
           register={register}
           type="password"
           id="password"
           name="password"
-          placeholder="Enter a password"
+          placeholder={t("register.placeholders.password")}
           required
         />
-        <Label htmlFor="repeat-password">Repeat Password</Label>
+        <Label htmlFor="repeat-password">{t("register.repeatPassword")}</Label>
         <Input
-          rules={{
-            validate: (value) => {
-              const password = getValues("password");
-              if (!value) {
-                return "Repeat password is required";
-              }
-              if (value !== password) {
-                return "Passwords doesn't match.";
-              }
-            },
-          }}
+          error={getErrorMessage("repeat-password")}
+          rules={formRules.repeatPassword}
           register={register}
           type="password"
           id="repeat-password"
           name="repeat-password"
-          placeholder="Repeat your password"
+          placeholder={t("register.placeholders.repeatPassword")}
           required
         />
-        <Button type="submit">Register</Button>
+        <Button type="submit">{t("register.register")}</Button>
       </form>
     </div>
   );

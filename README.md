@@ -42,37 +42,7 @@
 9. **Impliment graphs for music overwiev (needs more thinking).**
 10. **Add more stuff with time.**
 
-notes:
+## TODO:
 
-1. refactor button/label and other elements from value to children.
-2. reusable input/label combined element component.
-3. element folder for all small elements.
-4. src/elements folder without scss files and folders.
-5. file structure: 
-src/
-   render
-      /elements/
-                /Login
-      /components/
-                /Login
-                      /Login.tsx
-                      /utils.ts
-                      /LoginForm.tsx 
-                /WrapperBlock.tsx
-   tests
-      /elements/
-            /Login
-      /components/
-                /Login
-                      /Login.spec.tsx
-                      /utils.spec.ts
-                /WrapperBlock.spec.tsx
-   styles
-      /components/
-                /Login
-                    /login.scss
-                    /_loginBlocks.scss
-                /WrapperBlock
-                    /_index.scss
-                    /_utils.scss
-            components.scss
+1. refactor folder structure to simple src/components/Login/ Login.tsx loginStyle.scss loginAuth.ts and so on
+2. implement user creation (FINALLYY!!!!)
