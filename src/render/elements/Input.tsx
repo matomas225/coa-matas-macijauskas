@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  FieldError,
-  FieldErrorsImpl,
-  FieldValues,
-  Merge,
-  RegisterOptions,
-  UseFormRegister,
-} from "react-hook-form";
+import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
 import "@styles/elements/elements.scss";
 
 type InputProps = {
@@ -15,7 +8,7 @@ type InputProps = {
   name: string;
   placeholder?: string;
   required?: boolean;
-  register?: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<FieldValues> | undefined;
   rules?: RegisterOptions;
   error?: string;
 };

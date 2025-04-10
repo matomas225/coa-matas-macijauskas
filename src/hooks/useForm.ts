@@ -4,7 +4,7 @@ export const useFormWithErrorHandling = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     getValues,
   } = useForm();
 
@@ -18,5 +18,6 @@ export const useFormWithErrorHandling = () => {
     errors,
     getValues,
     getErrorMessage,
+    isSubmitting,
   };
 };

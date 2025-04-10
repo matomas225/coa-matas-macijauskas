@@ -1,4 +1,4 @@
-import { LoginForm } from "@render/components/Login/LoginForm";
+import { Login } from "@/render/components/Login/Login";
 import { Register } from "@render/components/Register/Register";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import React from "react";
@@ -10,7 +10,7 @@ const Auth: React.FC = () => {
 
   return (
     <article>
-      {formState ? <LoginForm /> : <Register />}
+      {formState ? <Login /> : <Register />}
       <button onClick={() => dispatch(changeValue())}>Switch State Test</button>
     </article>
   );

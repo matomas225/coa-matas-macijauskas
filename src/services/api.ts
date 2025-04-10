@@ -3,4 +3,6 @@ const users = `${API_URL}/users`;
 
 export const apiPaths = {
   getUsers: `${users}/getUsers`,
+  postUser: `${users}/postUser`,
+  loginUser: `${users}/loginUser`,
 };
