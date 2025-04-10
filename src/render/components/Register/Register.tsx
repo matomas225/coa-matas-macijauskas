@@ -6,23 +6,25 @@ import { useTranslation } from "react-i18next";
 import { useFormWithErrorHandling } from "@/hooks/useForm";
 import { registerFormRules } from "./registerFormRules";
 import "@styles/components/Register/Register.scss";
+import { createUser } from "./createUser";
+import { A } from "@/render/elements/A";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { changeValue } from "@/render/pages/Auth/authSlice";
 
 export const Register: React.FC = () => {
-  const { register, handleSubmit, getValues, getErrorMessage } =
+  const { register, handleSubmit, getValues, getErrorMessage, isSubmitting } =
     useFormWithErrorHandling();
 
   const formRules = registerFormRules(getValues);
+
+  const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
 
   return (
     <div className="form-register">
       <h1>{t("register.register")}</h1>
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-        })}
-      >
+      <form onSubmit={handleSubmit(createUser)}>
         <Label htmlFor="username">{t("register.username")}</Label>
         <Input
           error={getErrorMessage("username")}
@@ -32,7 +34,6 @@ export const Register: React.FC = () => {
           id="username"
           name="username"
           placeholder={t("register.placeholders.username")}
-          required
         />
         <Label htmlFor="email">{t("register.email")}</Label>
         <Input
@@ -43,7 +44,6 @@ export const Register: React.FC = () => {
           id="email"
           name="email"
           placeholder={t("register.placeholders.email")}
-          required
         />
         <Label htmlFor="password">{t("register.password")}</Label>
         <Input
@@ -54,20 +54,23 @@ export const Register: React.FC = () => {
           id="password"
           name="password"
           placeholder={t("register.placeholders.password")}
-          required
         />
         <Label htmlFor="repeat-password">{t("register.repeatPassword")}</Label>
         <Input
-          error={getErrorMessage("repeat-password")}
+          error={getErrorMessage("repeatPassword")}
           rules={formRules.repeatPassword}
           register={register}
           type="password"
-          id="repeat-password"
-          name="repeat-password"
+          id="repeatPassword"
+          name="repeatPassword"
           placeholder={t("register.placeholders.repeatPassword")}
-          required
         />
-        <Button type="submit">{t("register.register")}</Button>
+        <Button disabled={isSubmitting} type="submit">
+          {t("register.register")}
+        </Button>
+        <A onClick={() => dispatch(changeValue(true))} href="#">
+          {t("register.haveAccount")}
+        </A>
       </form>
     </div>
   );

@@ -5,6 +5,8 @@
     "email": "Email",
     "password": "Password",
     "repeatPassword": "Repeat Password",
+    "haveAccount": "Already have an account ?",
+    "userSuccess": "User created successfully.",
     "placeholders": {
       "username": "Enter a username",
       "email": "Enter your email: example@gmail.com",
@@ -14,11 +16,25 @@
     "errors": {
       "required": "This field is required",
       "username": "Username is required",
+      "usernameInUse": "Username is already in use.",
       "email": "Email is required",
+      "emailInUse": "Email is already in use.",
       "emailInvalid": "Please enter a valid email",
       "password": "Password is required",
       "passwordLength": "Password must be at least 8 characters long",
       "passwordMismatch": "Passwords doesn't match"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "noAccount": "Don't have an account ?",
+    "forgotPassword": "Forgot password ?",
+    "button": "Login",
+    "errors": {
+      "username": "Username is required",
+      "password": "Password is required"
     }
   }
 }
