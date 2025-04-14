@@ -5,4 +5,5 @@ export const apiPaths = {
   getUsers: `${users}/getUsers`,
   postUser: `${users}/postUser`,
   loginUser: `${users}/loginUser`,
+  isLogedIn: `${users}/isLogedIn`,
 };
