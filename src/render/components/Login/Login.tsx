@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { changeValue } from "@/render/pages/Auth/authSlice";
 import { Button } from "@render/elements/Button";
@@ -8,7 +8,7 @@ import "@styles/components/Login/Login.scss";
 import { useFormWithErrorHandling } from "@/hooks/useForm";
 import { useTranslation } from "react-i18next";
 import { loginFormRules } from "./loginFormRules";
-import { loginUser } from "./loginUser";
+import { isLogedIn, loginUser } from "./loginUser";
 
 export const Login: React.FC = () => {
   const { register, handleSubmit, getErrorMessage, isSubmitting } =
@@ -19,6 +19,11 @@ export const Login: React.FC = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
+
+  //check if use is loged in
+  useEffect(() => {
+    isLogedIn();
+  }, []);
 
   return (
     <div className="form-container">
