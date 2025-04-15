@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Home from "./render/pages/Home/Home";
-import NotFound from "./render/pages/NotFound/NotFound";
-import Navigation from "@/render/components/Navigation/Navigation";
-import { routes } from "./utils/routes";
-import Auth from "./render/pages/Auth/Auth";
 import { Slide, ToastContainer } from "react-toastify";
+import Navigation from "@/components/Navigation/Navigation";
+import NotFound from "@/pages/NotFound/NotFound";
+import Home from "@/pages/Home/Home";
+import Auth from "@/pages/Auth/Auth";
+import { routes } from "@utils/routes";
 
 const App: React.FC = () => {
   return (

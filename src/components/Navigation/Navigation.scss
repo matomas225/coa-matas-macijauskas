@@ -1,0 +1,41 @@
+header {
+  background-color: $black;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  padding-left: 10px;
+  height: 32px;
+  width: 32px;
+}
+
+ul {
+  @include reset-list;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 25px 10px;
+}
+
+li {
+  transition-duration: 0.1s;
+  cursor: pointer;
+  padding-left: 10px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.navlink {
+  text-decoration: none;
+  color: $textGrey;
+
+  &:hover {
+    color: $textPrimary;
+  }
+}

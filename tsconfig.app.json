@@ -27,8 +27,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@utils/*": ["src/utils/*"],
-      "@styles/*": ["src/styles/*"],
-      "@render/*": ["src/render/*"]
+      "@elements/*": ["src/components/elements/*"]
     }
   },
 
