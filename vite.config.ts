@@ -8,17 +8,16 @@ import path from "path";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"), // Set up the alias
+      "@": path.resolve(__dirname, "src"),
       "@utils": path.resolve(__dirname, "src/utils"),
-      "@styles": path.resolve(__dirname, "src/styles"),
-      "@render": path.resolve(__dirname, "src/render"),
+      "@elements": path.resolve(__dirname, "src/components/elements"),
     },
   },
   plugins: [react()],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/global/variables.scss" as *; @use "@/styles/global/mixins.scss" as *; @use "@/styles/global/global.scss" as *;`, // Automatically import global SCSS files
+        additionalData: `@use "@/styles/variables.scss" as *; @use "@/styles/mixins.scss" as *; @use "@/styles/global.scss" as *;`, // Automatically import global SCSS files
       },
     },
   },
