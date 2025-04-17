@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import Navigation from "@/components/Navigation/Navigation";
@@ -6,8 +6,21 @@ import NotFound from "@/pages/NotFound/NotFound";
 import Home from "@/pages/Home/Home";
 import Auth from "@/pages/Auth/Auth";
 import { routes } from "@utils/routes";
+import axios from "axios";
+import { apiPaths } from "./services/api";
 
 const App: React.FC = () => {
+  const [songs, setSongs] = useState([]);
+  console.log(songs);
+
+  useEffect(() => {
+    const getSongs = async () => {
+      const response = await axios.get(apiPaths.getSongs);
+
+      setSongs(response.data);
+    };
+    getSongs();
+  }, []);
   return (
     <BrowserRouter>
       <Navigation />
@@ -29,6 +42,21 @@ const App: React.FC = () => {
         theme="dark"
         transition={Slide}
       />
+      <>
+        {songs.length === 0 ? (
+          <p>Loading..</p>
+        ) : (
+          <div>
+            {songs.map((songUrl, index) => (
+              <div key={index}>
+                <audio controls>
+                  <source src={songUrl} type="audio/mpeg" />
+                </audio>
+              </div>
+            ))}
+          </div>
+        )}
+      </>
     </BrowserRouter>
   );
 };
