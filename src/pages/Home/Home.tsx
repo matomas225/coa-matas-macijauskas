@@ -5,7 +5,6 @@ import { apiPaths } from "@/services/api";
 
 const Home: React.FC = () => {
   const [songs, setSongs] = useState([]);
-  console.log(songs);
 
   useEffect(() => {
     const getSongs = async () => {

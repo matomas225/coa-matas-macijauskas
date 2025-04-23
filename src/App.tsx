@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import Navigation from "@/components/Navigation/Navigation";
 import NotFound from "@/pages/NotFound/NotFound";
@@ -8,10 +8,12 @@ import Auth from "@/pages/Auth/Auth";
 import { routes } from "@utils/routes";
 import axios from "axios";
 import { apiPaths } from "./services/api";
+import { useSelector } from "react-redux";
+import { getUserState } from "./components/Login/sessionSlice";
 
 const App: React.FC = () => {
   const [songs, setSongs] = useState([]);
-  console.log(songs);
+  const user = useSelector(getUserState);
 
   useEffect(() => {
     const getSongs = async () => {
@@ -21,12 +23,16 @@ const App: React.FC = () => {
     };
     getSongs();
   }, []);
+
   return (
     <BrowserRouter>
       <Navigation />
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.auth} element={<Auth />} />
+        <Route
+          path={routes.auth}
+          element={user ? <Navigate to={routes.home} /> : <Auth />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer

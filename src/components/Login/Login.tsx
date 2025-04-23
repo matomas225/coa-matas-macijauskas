@@ -21,14 +21,6 @@ export const Login: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  //IT WORKS!!!!
-  // useEffect(() => {
-  //   if (token) {
-  //     console.log(isTokenExpired(token));
-  //   }
-  //   isLogedIn();
-  // }, []);
-
   return (
     <div className="form-container">
       <h1>{t("login.title")}</h1>
