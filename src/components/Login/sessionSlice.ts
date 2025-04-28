@@ -2,13 +2,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/state/store";
 import { isTokenExpired } from "@/utils/isTokenExpired";
 
+type User = {
+  username: string;
+  email: string;
+};
+
+type SessionType = {
+  token: string | null;
+  user: User | null;
+};
+
 const getInitialState = () => {
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
   const tokenExpiration = token ? isTokenExpired(token) : true;
 
-  // Clear the expired token and user from localStorage
   if (tokenExpiration) {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -20,13 +29,13 @@ const getInitialState = () => {
   };
 };
 
-const initialState = getInitialState();
+const initialState: SessionType = getInitialState();
 
 export const sessionSlice = createSlice({
   name: "session",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<any>) => {
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       if (action.payload) {
         localStorage.setItem("user", JSON.stringify(action.payload));

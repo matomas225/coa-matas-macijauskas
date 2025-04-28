@@ -22,6 +22,10 @@ ul {
 }
 
 li {
+  position: relative;
+}
+
+.navlinkWrapper {
   transition-duration: 0.1s;
   cursor: pointer;
   padding-left: 10px;

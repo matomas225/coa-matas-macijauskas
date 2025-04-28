@@ -1,0 +1,29 @@
+.profile-popup-wrapper {
+  border-radius: 10px;
+  background-color: $bgGrey;
+  position: absolute;
+  top: 43px;
+  right: 0;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    li {
+      box-sizing: border-box;
+      padding: 10px 40px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 10px;
+      list-style: none;
+
+      &:hover {
+        background-color: $bgLightGrey;
+      }
+    }
+  }
+}

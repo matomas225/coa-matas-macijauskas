@@ -4,12 +4,14 @@ import { routes } from "@utils/routes";
 import Logo from "@/assets/logo-white.svg";
 import "./Navigation.scss";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { getUserState, logoutUser } from "../Login/sessionSlice";
-import { useAppDispatch } from "@/hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { ProfilePopup } from "../Profile/ProfilePopup";
+import { setProfilePopup } from "../Profile/profilePopupSlice";
 
 const Navigation: React.FC = () => {
-  const user = useSelector(getUserState);
+  const user = useAppSelector(getUserState);
+
   const dispatch = useAppDispatch();
 
   const navigationItems = user
@@ -19,8 +21,10 @@ const Navigation: React.FC = () => {
           name: "Home",
         },
         {
-          route: routes.home,
+          route: "#",
           name: user.username,
+          onClick: () => dispatch(setProfilePopup()),
+          element: <ProfilePopup />,
         },
         {
           route: routes.home,
@@ -51,6 +55,7 @@ const Navigation: React.FC = () => {
               route={item.route}
               name={item.name}
               onClick={item.onClick}
+              element={item.element}
             />
           ))}
         </ul>

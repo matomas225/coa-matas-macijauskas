@@ -5,14 +5,18 @@ type NavItemProps = {
   route: string;
   name: string;
   onClick?: () => void;
+  element?: any;
 };
 
-const NavItem: React.FC<NavItemProps> = ({ route, name, onClick }) => {
+const NavItem: React.FC<NavItemProps> = ({ route, name, onClick, element }) => {
   return (
     <li>
-      <NavLink className="navlink" to={route} onClick={onClick}>
-        {name}
-      </NavLink>
+      <div className="navlinkWrapper">
+        <NavLink className="navlink" to={route} onClick={onClick}>
+          {name}
+        </NavLink>
+      </div>
+      {element && element}
     </li>
   );
 };

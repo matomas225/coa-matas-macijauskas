@@ -1,0 +1,30 @@
+function getList(...list) {
+    ...
+}
+
+
+const list = {
+    protected: false,
+    isLoggedIn: false,
+    list: [
+        ...
+    ]
+}
+
+const listp = {
+    protected: true,
+    isLoggedIn: false,
+    list: [
+        ...
+    ]
+}
+
+const listul = {
+    protected: false,
+    isLoggedIn: true,
+    list: [
+        ...
+    ]
+}
+
+getList(list, listp, listul)

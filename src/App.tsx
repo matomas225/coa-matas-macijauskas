@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import Navigation from "@/components/Navigation/Navigation";
@@ -6,22 +6,26 @@ import NotFound from "@/pages/NotFound/NotFound";
 import Home from "@/pages/Home/Home";
 import Auth from "@/pages/Auth/Auth";
 import { routes } from "@utils/routes";
-import axios from "axios";
-import { apiPaths } from "./services/api";
-import { useSelector } from "react-redux";
-import { getUserState } from "./components/Login/sessionSlice";
+import { getUserState, logoutUser } from "./components/Login/sessionSlice";
+import { Profile } from "./pages/Profile/Profile";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { isLoggedIn } from "@/components/Login/loginUser";
 
 const App: React.FC = () => {
-  const [songs, setSongs] = useState([]);
-  const user = useSelector(getUserState);
+  const user = useAppSelector(getUserState);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const getSongs = async () => {
-      const response = await axios.get(apiPaths.getSongs);
-
-      setSongs(response.data);
+    const checkLogin = async () => {
+      const logedIn = await isLoggedIn();
+      if (!logedIn) {
+        dispatch(logoutUser());
+      }
     };
-    getSongs();
+
+    checkLogin();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -29,10 +33,16 @@ const App: React.FC = () => {
       <Navigation />
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route
-          path={routes.auth}
-          element={user ? <Navigate to={routes.home} /> : <Auth />}
-        />
+        {user ? (
+          <>
+            <Route path={routes.profile} element={<Profile />} />
+            <Route path={routes.auth} element={<Navigate to={routes.home} />} />
+          </>
+        ) : (
+          <>
+            <Route path={routes.auth} element={<Auth />} />
+          </>
+        )}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer
@@ -48,21 +58,6 @@ const App: React.FC = () => {
         theme="dark"
         transition={Slide}
       />
-      <>
-        {songs.length === 0 ? (
-          <p>Loading..</p>
-        ) : (
-          <div>
-            {songs.map((songUrl, index) => (
-              <div key={index}>
-                <audio controls>
-                  <source src={songUrl} type="audio/mpeg" />
-                </audio>
-              </div>
-            ))}
-          </div>
-        )}
-      </>
     </BrowserRouter>
   );
 };

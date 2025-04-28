@@ -21,14 +21,17 @@ export const loginUser = async (data: FieldValues) => {
   }
 };
 
-export const isLogedIn = async () => {
+export const isLoggedIn = async () => {
   const token = localStorage.getItem("token");
   try {
     const response = await axios.get(apiPaths.isLogedIn, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log(response);
+
+    return !!response.data.status;
   } catch (err) {
-    console.log(err);
+    if (axios.isAxiosError(err)) {
+      return false;
+    }
   }
 };
