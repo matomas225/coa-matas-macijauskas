@@ -4,14 +4,25 @@ import { closeProfilePopup, getProfilePopupState } from "./profilePopupSlice";
 import React from "react";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGear,
+  faUser,
+  faArrowRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
-export const ProfilePopup: React.FC = () => {
+type ProfilePopupProps = {
+  ignoreRef?: React.RefObject<HTMLLIElement | null>;
+};
+
+export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
   const displayPopup = useAppSelector(getProfilePopupState);
   const dispatch = useAppDispatch();
 
-  const ref = useOnClickOutside(() => {
-    dispatch(closeProfilePopup());
+  const ref = useOnClickOutside({
+    callback: () => {
+      dispatch(closeProfilePopup());
+    },
+    ignoreRef,
   });
 
   return (
@@ -19,11 +30,17 @@ export const ProfilePopup: React.FC = () => {
       {displayPopup ? (
         <div ref={ref} className="profile-popup-wrapper">
           <ul>
-            {/* Add Icons to Items When maping from item array TODO  */}
-            {/* <FontAwesomeIcon className="icon" icon={faHouse} /> */}
-            <li> Profile</li>
-            <li>Settings</li>
-            <li>Logout</li>
+            <li>
+              <FontAwesomeIcon icon={faUser} /> Profile
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faGear} />
+              Settings
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faArrowRightFromBracket} />
+              Logout
+            </li>
             <li>So on..</li>
           </ul>
         </div>

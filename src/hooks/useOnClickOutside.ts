@@ -1,11 +1,27 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
-function useOnClickOutside(callback: () => void) {
+type useOnClickOutsideProps = {
+  callback: () => void;
+  ignoreRef?: React.RefObject<HTMLElement | null>;
+};
+
+const useOnClickOutside = ({
+  callback,
+  ignoreRef,
+}: useOnClickOutsideProps): React.RefObject<HTMLDivElement | null> => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+
+      const clickedOutsidePopup = ref.current && !ref.current.contains(target);
+
+      const clickedOutsideIgnore = ignoreRef?.current
+        ? !ignoreRef.current.contains(target)
+        : true;
+
+      if (clickedOutsidePopup && clickedOutsideIgnore) {
         callback();
       }
     }
@@ -15,9 +31,10 @@ function useOnClickOutside(callback: () => void) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [callback]);
+    // eslint-disable-next-line
+  }, []);
 
   return ref;
-}
+};
 
 export default useOnClickOutside;
