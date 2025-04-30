@@ -1,0 +1,40 @@
+.songs-wrapper {
+  background: $gradientLightGrey;
+  background: linear-gradient(
+    180deg,
+    $gradientLightGrey 0%,
+    $gradientGrey 100%
+  );
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.songs {
+  display: flex;
+}
+
+.card-wrapper {
+  padding: 10px;
+  background-color: $bgLightGrey;
+
+  div {
+    background-color: blue;
+    border-radius: 6px;
+    width: 155px;
+    height: 155px;
+  }
+  h3 {
+    margin: 0;
+    color: $textPrimary;
+    font-family: "circular-light";
+    font-size: 16px;
+  }
+  p {
+    margin: 0;
+    color: $textGrey;
+    font-family: "circular-light";
+    font-size: 12px;
+  }
+}

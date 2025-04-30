@@ -3,16 +3,31 @@ import "./ProfilePopup.scss";
 import { closeProfilePopup, getProfilePopupState } from "./profilePopupSlice";
 import React from "react";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGear,
   faUser,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { PopupListItem } from "./PopupListItem";
 
 type ProfilePopupProps = {
   ignoreRef?: React.RefObject<HTMLLIElement | null>;
 };
+
+const popupList = [
+  {
+    name: "Profile",
+    icon: faUser,
+  },
+  {
+    name: "Settings",
+    icon: faGear,
+  },
+  {
+    name: "Logout",
+    icon: faArrowRightFromBracket,
+  },
+];
 
 export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
   const displayPopup = useAppSelector(getProfilePopupState);
@@ -30,18 +45,11 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
       {displayPopup ? (
         <div ref={ref} className="profile-popup-wrapper">
           <ul>
-            <li>
-              <FontAwesomeIcon icon={faUser} /> Profile
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faGear} />
-              Settings
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
-              Logout
-            </li>
-            <li>So on..</li>
+            {popupList.map((item, i) => {
+              return (
+                <PopupListItem name={item.name} icon={item.icon} key={i} />
+              );
+            })}
           </ul>
         </div>
       ) : null}
