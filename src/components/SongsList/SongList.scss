@@ -17,19 +17,41 @@
 
 .card-wrapper {
   padding: 10px;
-  background-color: $bgLightGrey;
+  border-radius: 6px;
+  cursor: pointer;
 
-  div {
-    background-color: blue;
-    border-radius: 6px;
-    width: 155px;
-    height: 155px;
+  &:hover {
+    background-color: $bgGrey;
+  }
+
+  .image-wrapper {
+    position: relative;
+    img {
+      border-radius: 6px;
+      padding: 0;
+      width: 155px;
+      height: 155px;
+    }
+  }
+  .play-icon {
+    color: $accentColorDarker;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    transition-duration: 0.1s;
+
+    &:hover {
+      color: $accentColor;
+      transform: scale(1.1);
+    }
   }
   h3 {
-    margin: 0;
+    margin: 6px 0 4px 0;
     color: $textPrimary;
     font-family: "circular-light";
-    font-size: 16px;
+    font-size: 14px;
   }
   p {
     margin: 0;
