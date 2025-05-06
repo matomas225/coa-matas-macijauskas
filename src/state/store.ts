@@ -1,5 +1,6 @@
 import { sessionSlice } from "@/components/Login/sessionSlice";
 import { profilePopupSlice } from "@/components/Profile/profilePopupSlice";
+import { songSlice } from "@/components/SongsList/songSlice";
 import { authSlice } from "@/pages/Auth/authSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -8,6 +9,7 @@ const store = configureStore({
     auth: authSlice.reducer,
     session: sessionSlice.reducer,
     profilePopup: profilePopupSlice.reducer,
+    songState: songSlice.reducer,
   },
 });
 

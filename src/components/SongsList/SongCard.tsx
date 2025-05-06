@@ -1,19 +1,37 @@
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
-export const SongCard: React.FC = ({ song, image, title, artist, songId }) => {
-  const songRef = useRef(null);
+type SongCardProps = {
+  songId: string;
+  song: string;
+  image: string;
+  title: string;
+  artist: string;
+  audioRef: (element: HTMLAudioElement | null) => void;
+  handleOnClick: () => void;
+  playPause: IconDefinition;
+};
 
+export const SongCard: React.FC<SongCardProps> = ({
+  song,
+  image,
+  title,
+  artist,
+  songId,
+  audioRef,
+  handleOnClick,
+  playPause,
+}) => {
   return (
     <div className="card-wrapper">
-      <audio ref={songRef} src={song} id={songId} />
+      <audio ref={audioRef} src={song} id={songId} />
       <div className="image-wrapper">
         <img src={image} />
         <FontAwesomeIcon
-          icon={faCirclePlay}
+          icon={playPause}
           className="play-icon"
-          onClick={() => songRef.current.play()}
+          onClick={handleOnClick}
         />
       </div>
       <h3>{title}</h3>
