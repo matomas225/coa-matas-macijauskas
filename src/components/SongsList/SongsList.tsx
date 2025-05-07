@@ -11,6 +11,7 @@ import {
   getSongId,
   setIsSongPlaying,
   setSongId,
+  setSongsList,
 } from "./songSlice";
 
 type Songs = {
@@ -20,8 +21,11 @@ type Songs = {
   title: string;
   artist: string;
 };
+type SongsListProps = {
+  songRefCallback: (songRefs: (HTMLAudioElement | null)[]) => void;
+};
 
-export const SongsList: React.FC = () => {
+export const SongsList: React.FC<SongsListProps> = ({ songRefCallback }) => {
   const [songs, setSongs] = useState<Songs[] | null>(null);
 
   const dispatch = useAppDispatch();
@@ -29,6 +33,12 @@ export const SongsList: React.FC = () => {
   const currentSongId = useAppSelector(getSongId);
 
   const songRefs = useRef<(HTMLAudioElement | null)[]>([]);
+
+  useEffect(() => {
+    if (songRefCallback && songRefs.current) {
+      songRefCallback(songRefs.current);
+    }
+  }, [songRefCallback]);
 
   const handleOnClick = (songId: string, songRef: HTMLAudioElement | null) => {
     if (songRef) {
@@ -66,11 +76,12 @@ export const SongsList: React.FC = () => {
       const results = await axios.get(apiPaths.getSongs);
       if (results.data) {
         setSongs(results.data);
+        dispatch(setSongsList(results.data));
       }
     };
 
     getSongs();
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="songs-wrapper">
