@@ -4,4 +4,87 @@
   background-color: $black;
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  img {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    padding: 0;
+    border-radius: 5px;
+  }
+  .song-info,
+  .audio-controls,
+  .song-time {
+    flex: 1;
+  }
+  .song-info {
+    display: flex;
+    align-items: center;
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      justify-self: flex-start;
+      .song-title {
+        margin: 0;
+        font-size: 14px;
+        color: $textPrimary;
+        font-family: "circular-light";
+      }
+      .song-artist {
+        margin: 0;
+        font-size: 12px;
+        color: $textGrey;
+        font-family: "circular-light";
+      }
+    }
+  }
+
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .previous-button,
+    .next-button {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      color: $iconGrey;
+      transition-duration: 0.2s;
+      &:hover {
+        color: $iconWhite;
+        transform: scale(1.05);
+      }
+    }
+    .play-pause-button {
+      width: 32px;
+      height: 32px;
+      margin: 0 20px;
+      cursor: pointer;
+      color: $iconWhite;
+      transition-duration: 0.2s;
+      &:hover {
+        color: $iconGrey;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .song-time {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    .song-played {
+      color: $textGrey;
+    }
+    .song-duration {
+      color: $textGrey;
+    }
+    span {
+      color: $textGrey;
+    }
+  }
 }

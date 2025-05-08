@@ -48,6 +48,7 @@ export const SongsList: React.FC<SongsListProps> = ({ songRefCallback }) => {
         );
         currentSongRef?.pause();
 
+        songRef.currentTime = 0;
         songRef.play();
         dispatch(setIsSongPlaying(true));
         dispatch(setSongId(songId));
