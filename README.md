@@ -44,5 +44,4 @@
 
 ## TODO:
 
-1. refactor folder structure to simple src/components/Login/ Login.tsx loginStyle.scss loginAuth.ts and so on
-2. implement user creation (FINALLYY!!!!)
+maybe implement redux play/pause/next songs functions

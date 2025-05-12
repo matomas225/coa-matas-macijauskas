@@ -9,25 +9,11 @@ import {
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { PopupListItem } from "./PopupListItem";
+import { logoutUser } from "@/components/Login/sessionSlice";
 
 type ProfilePopupProps = {
   ignoreRef?: React.RefObject<HTMLLIElement | null>;
 };
-
-const popupList = [
-  {
-    name: "Profile",
-    icon: faUser,
-  },
-  {
-    name: "Settings",
-    icon: faGear,
-  },
-  {
-    name: "Logout",
-    icon: faArrowRightFromBracket,
-  },
-];
 
 export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
   const displayPopup = useAppSelector(getProfilePopupState);
@@ -40,6 +26,25 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
     ignoreRef,
   });
 
+  const popupList = [
+    {
+      name: "Profile",
+      icon: faUser,
+    },
+    {
+      name: "Settings",
+      icon: faGear,
+    },
+    {
+      name: "Logout",
+      icon: faArrowRightFromBracket,
+      onClick: () => {
+        dispatch(logoutUser());
+        dispatch(closeProfilePopup());
+      },
+    },
+  ];
+
   return (
     <>
       {displayPopup ? (
@@ -47,7 +52,12 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
           <ul>
             {popupList.map((item, i) => {
               return (
-                <PopupListItem name={item.name} icon={item.icon} key={i} />
+                <PopupListItem
+                  name={item.name}
+                  icon={item.icon}
+                  onClick={item?.onClick}
+                  key={i}
+                />
               );
             })}
           </ul>

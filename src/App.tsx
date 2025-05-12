@@ -10,6 +10,7 @@ import { getUserState, logoutUser } from "./components/Login/sessionSlice";
 import { Profile } from "./pages/Profile/Profile";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { isLoggedIn } from "@/components/Login/loginUser";
+import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 
 const App: React.FC = () => {
   const user = useAppSelector(getUserState);
@@ -25,8 +26,7 @@ const App: React.FC = () => {
     };
 
     checkLogin();
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -45,6 +45,7 @@ const App: React.FC = () => {
         )}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <AudioPlayer />
       <ToastContainer
         position="bottom-left"
         autoClose={2000}

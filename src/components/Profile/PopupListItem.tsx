@@ -5,11 +5,16 @@ import React from "react";
 type PopupListItemProps = {
   name: string;
   icon: IconDefinition;
+  onClick?: () => void;
 };
 
-export const PopupListItem: React.FC<PopupListItemProps> = ({ name, icon }) => {
+export const PopupListItem: React.FC<PopupListItemProps> = ({
+  name,
+  icon,
+  onClick,
+}) => {
   return (
-    <li>
+    <li onClick={onClick}>
       <FontAwesomeIcon icon={icon} />
       {name}
     </li>

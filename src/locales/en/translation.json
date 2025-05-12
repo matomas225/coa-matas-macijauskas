@@ -32,6 +32,8 @@
     "noAccount": "Don't have an account ?",
     "forgotPassword": "Forgot password ?",
     "button": "Login",
+    "logedIn": "Loged In!",
+    "logedOut": "Loged Out!",
     "errors": {
       "username": "Username is required",
       "password": "Password is required"

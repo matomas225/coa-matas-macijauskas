@@ -4,7 +4,7 @@ import { routes } from "@utils/routes";
 import Logo from "@/assets/logo-white.svg";
 import "./Navigation.scss";
 import { NavLink } from "react-router-dom";
-import { getUserState, logoutUser } from "../Login/sessionSlice";
+import { getUserState } from "../Login/sessionSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { ProfilePopup } from "../Profile/ProfilePopup";
 import { setProfilePopup } from "../Profile/profilePopupSlice";
@@ -28,11 +28,6 @@ const Navigation: React.FC = () => {
           containerRef: ref,
           onClick: () => dispatch(setProfilePopup()),
           element: <ProfilePopup ignoreRef={ref} />,
-        },
-        {
-          route: routes.home,
-          name: "Logout",
-          onClick: () => dispatch(logoutUser()),
         },
       ]
     : [

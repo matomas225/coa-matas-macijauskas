@@ -1,69 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./AudioPlayer.scss";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import {
-  getIsSongPlaying,
-  getSongId,
-  getSongsList,
-  setIsSongPlaying,
-  setSongId,
-} from "../SongsList/songSlice";
 import { formatTime } from "@utils/formatTime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBackward,
-  faCirclePause,
-  faCirclePlay,
-  faForward,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBackward, faForward } from "@fortawesome/free-solid-svg-icons";
+import { useAudioPlayer } from "./useAudioPlayer";
+import { useCurrentSong } from "./useCurrentSong";
 
-type AudioPlayerProps = {
-  songRefs: (HTMLAudioElement | null)[];
-};
+export const AudioPlayer: React.FC = () => {
+  const {
+    currentSongData,
+    isPlaying,
+    currentSongId,
+    songIcon,
+    handlePlayPause,
+    handleNextSong,
+    handlePreviousSong,
+  } = useCurrentSong();
 
-export const AudioPlayer: React.FC<AudioPlayerProps> = ({ songRefs }) => {
-  const [currentTime, setCurrentTime] = useState(0);
-  const dispatch = useAppDispatch();
-  const isPlaying = useAppSelector(getIsSongPlaying);
-  const songsList = useAppSelector(getSongsList);
-  const currentSongId = useAppSelector(getSongId);
-  const currentSongData = songsList?.find((song) => song.id === currentSongId);
-  const currentSongRef = songRefs?.find((audio) => audio?.id === currentSongId);
-  const currentSongIndex = songRefs.findIndex(
-    (audio) => audio?.id === currentSongId
+  const { audioRef, currentTime, duration } = useAudioPlayer(
+    currentSongData?.songPath ? currentSongData?.songPath : "",
+    isPlaying,
+    currentSongId
   );
-  const songDuration = currentSongRef ? currentSongRef.duration : 0;
-
-  const getSongIcon = () => {
-    if (isPlaying) {
-      return faCirclePause;
-    } else {
-      return faCirclePlay;
-    }
-  };
-
-  useEffect(() => {
-    const audio = currentSongRef;
-
-    if (!audio) return;
-
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-    };
-
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-
-    return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-    };
-  }, [currentSongRef]);
 
   return (
-    songsList &&
-    currentSongId &&
     currentSongData &&
-    songRefs && (
+    currentSongId && (
       <div className="audio-player">
+        <audio ref={audioRef} id={currentSongId} />
         <div className="song-info">
           <img src={currentSongData.imagePath} alt="song-image" />
           <div>
@@ -76,51 +40,23 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ songRefs }) => {
           <FontAwesomeIcon
             className="previous-button"
             icon={faBackward}
-            onClick={() => {
-              const previousSong = songRefs[currentSongIndex - 1];
-
-              if (previousSong) {
-                currentSongRef?.pause();
-                dispatch(setSongId(previousSong.id));
-                previousSong.play();
-                previousSong.currentTime = 0;
-                dispatch(setIsSongPlaying(true));
-              }
-            }}
+            onClick={handlePreviousSong}
           />
           <FontAwesomeIcon
             className="play-pause-button"
-            icon={getSongIcon()}
-            onClick={() => {
-              if (isPlaying) {
-                currentSongRef?.pause();
-                dispatch(setIsSongPlaying(false));
-              } else {
-                currentSongRef?.play();
-                dispatch(setIsSongPlaying(true));
-              }
-            }}
+            icon={songIcon()}
+            onClick={handlePlayPause}
           />
           <FontAwesomeIcon
             className="next-button"
             icon={faForward}
-            onClick={() => {
-              const nextSong = songRefs[currentSongIndex + 1];
-
-              if (nextSong) {
-                currentSongRef?.pause();
-                dispatch(setSongId(nextSong.id));
-                nextSong.play();
-                nextSong.currentTime = 0;
-                dispatch(setIsSongPlaying(true));
-              }
-            }}
+            onClick={handleNextSong}
           />
         </div>
         <div className="song-time">
           <p className="song-played">{formatTime(currentTime)} </p>
           <span>/</span>
-          <p className="song-duration">{formatTime(songDuration)}</p>
+          <p className="song-duration">{formatTime(duration)}</p>
         </div>
       </div>
     )
