@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward, faForward } from "@fortawesome/free-solid-svg-icons";
 import { useAudioPlayer } from "./useAudioPlayer";
 import { useCurrentSong } from "./useCurrentSong";
-
 export const AudioPlayer: React.FC = () => {
   const {
     currentSongData,
@@ -17,7 +16,15 @@ export const AudioPlayer: React.FC = () => {
     handlePreviousSong,
   } = useCurrentSong();
 
-  const { audioRef, currentTime, duration } = useAudioPlayer(
+  const {
+    audioRef,
+    currentTime,
+    duration,
+    volume,
+    volumeIcon,
+    handleVolumeChange,
+    handleSliderChange,
+  } = useAudioPlayer(
     currentSongData?.songPath ? currentSongData?.songPath : "",
     isPlaying,
     currentSongId
@@ -37,26 +44,53 @@ export const AudioPlayer: React.FC = () => {
         </div>
 
         <div className="audio-controls">
-          <FontAwesomeIcon
-            className="previous-button"
-            icon={faBackward}
-            onClick={handlePreviousSong}
-          />
-          <FontAwesomeIcon
-            className="play-pause-button"
-            icon={songIcon()}
-            onClick={handlePlayPause}
-          />
-          <FontAwesomeIcon
-            className="next-button"
-            icon={faForward}
-            onClick={handleNextSong}
-          />
+          <div className="wrapper">
+            <div className="buttons">
+              <FontAwesomeIcon
+                className="previous-button"
+                icon={faBackward}
+                onClick={handlePreviousSong}
+              />
+              <FontAwesomeIcon
+                className="play-pause-button"
+                icon={songIcon()}
+                onClick={handlePlayPause}
+              />
+              <FontAwesomeIcon
+                className="next-button"
+                icon={faForward}
+                onClick={handleNextSong}
+              />
+            </div>
+            <div className="slider">
+              <input
+                type="range"
+                className="audio-slider"
+                min="0"
+                max={duration}
+                value={currentTime}
+                onChange={handleSliderChange}
+                step="0.1"
+              />
+            </div>
+          </div>
         </div>
         <div className="song-time">
-          <p className="song-played">{formatTime(currentTime)} </p>
-          <span>/</span>
-          <p className="song-duration">{formatTime(duration)}</p>
+          <div>
+            <FontAwesomeIcon icon={volumeIcon} className="fa-fw volume-icon" />
+            <input
+              type="range"
+              className="volume-slider"
+              min="0"
+              max="1"
+              value={volume}
+              onChange={handleVolumeChange}
+              step="0.1"
+            />
+            <p className="song-time">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </p>
+          </div>
         </div>
       </div>
     )

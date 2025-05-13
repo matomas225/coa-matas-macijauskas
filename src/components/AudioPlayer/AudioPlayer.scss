@@ -45,46 +45,159 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .previous-button,
-    .next-button {
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-      color: $iconGrey;
-      transition-duration: 0.2s;
-      &:hover {
+    .wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 10px;
+      .previous-button,
+      .next-button {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        color: $iconGrey;
+        transition-duration: 0.2s;
+        &:hover {
+          color: $iconWhite;
+          transform: scale(1.05);
+        }
+      }
+      .play-pause-button {
+        width: 32px;
+        height: 32px;
+        margin: 0 20px;
+        cursor: pointer;
         color: $iconWhite;
-        transform: scale(1.05);
+        transition-duration: 0.2s;
+        &:hover {
+          color: $iconGrey;
+          transform: scale(1.05);
+        }
       }
     }
-    .play-pause-button {
-      width: 32px;
-      height: 32px;
-      margin: 0 20px;
-      cursor: pointer;
-      color: $iconWhite;
-      transition-duration: 0.2s;
-      &:hover {
-        color: $iconGrey;
-        transform: scale(1.05);
+    .slider {
+      width: 100%;
+      .audio-slider {
+        width: 100%;
+        height: 6px;
+        background: $bgGrey;
+        overflow: hidden;
+        border-radius: 3px;
+        outline: none;
+        -webkit-appearance: none;
+        accent-color: $accentColorDarker;
+
+        // WebKit Track (Chrome, Brave, Safari)
+        &::-webkit-slider-runnable-track {
+          background-color: $bgGrey;
+          height: 6px;
+          border-radius: 3px;
+        }
+
+        // Firefox Track
+        &::-moz-range-track {
+          background-color: $bgGrey;
+          height: 6px;
+          border-radius: 3px;
+        }
+
+        // WebKit Thumb
+        &::-webkit-slider-thumb {
+          box-shadow: -407px 0 0 400px #f50;
+          -webkit-appearance: none;
+          height: 14px;
+          width: 16px;
+          background: $accentColorDarker;
+          border-radius: 6px;
+          cursor: pointer;
+          border: none;
+          margin-top: -4px; // adjust to vertically center thumb
+        }
+
+        // Firefox Thumb
+        &::-moz-range-thumb {
+          box-shadow: -407px 0 0 400px #f50;
+          height: 14px;
+          width: 16px;
+          background: $accentColorDarker;
+          border-radius: 6px;
+          cursor: pointer;
+          border: none;
+        }
       }
     }
   }
 
   .song-time {
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    justify-content: end;
     padding: 10px;
-    .song-played {
-      color: $textGrey;
-    }
-    .song-duration {
-      color: $textGrey;
-    }
-    span {
-      color: $textGrey;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      .volume-icon {
+        color: $iconGrey;
+      }
+      .volume-slider {
+        height: 6px;
+        background: $bgGrey;
+        border-radius: 3px;
+        outline: none;
+        margin-left: 10px;
+        -webkit-appearance: none;
+        accent-color: $accentColorDarker;
+
+        // WebKit Track (Chrome, Brave, Safari)
+        &::-webkit-slider-runnable-track {
+          background-color: $bgGrey;
+          height: 6px;
+          border-radius: 3px;
+        }
+
+        // Firefox Track
+        &::-moz-range-track {
+          background-color: $bgGrey;
+          height: 6px;
+          border-radius: 3px;
+        }
+
+        // WebKit Thumb
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 14px;
+          width: 16px;
+          background: $accentColorDarker;
+          border-radius: 6px;
+          cursor: pointer;
+          border: none;
+          margin-top: -4px; // adjust to vertically center thumb
+        }
+
+        // Firefox Thumb
+        &::-moz-range-thumb {
+          height: 14px;
+          width: 16px;
+          background: $accentColorDarker;
+          border-radius: 6px;
+          cursor: pointer;
+          border: none;
+        }
+      }
+
+      .song-time {
+        color: $textGrey;
+        width: 8ch;
+        white-space: nowrap;
+      }
     }
   }
 }
