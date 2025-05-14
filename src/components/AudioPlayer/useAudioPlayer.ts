@@ -11,6 +11,8 @@ export const useAudioPlayer = (
   currentSongId: string | null
 ) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioSliderRef = useRef<HTMLInputElement | null>(null);
+  const volumeSliderRef = useRef<HTMLInputElement | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
@@ -21,6 +23,7 @@ export const useAudioPlayer = (
     if (!audio) return;
     const time = parseFloat(e.target.value);
     audio.currentTime = time;
+
     setCurrentTime(time);
   };
 
@@ -38,6 +41,10 @@ export const useAudioPlayer = (
     }
     audio.volume = newVolume;
     setVolume(newVolume);
+    const percentage = newVolume * 100;
+    if (volumeSliderRef.current) {
+      volumeSliderRef.current.style.setProperty("--volume", `${percentage}%`);
+    }
   };
 
   useEffect(() => {
@@ -45,6 +52,13 @@ export const useAudioPlayer = (
     if (!audio) return;
 
     const handleTimeUpdate = () => {
+      const valuePercentage = (audio.currentTime / audio.duration) * 100;
+      if (audioSliderRef.current) {
+        audioSliderRef.current.style.setProperty(
+          "--progress",
+          `${valuePercentage}%`
+        );
+      }
       if (audio.duration) {
         setCurrentTime(audio.currentTime);
         setDuration(audio.duration);
@@ -89,6 +103,8 @@ export const useAudioPlayer = (
     duration,
     volume,
     volumeIcon,
+    audioSliderRef,
+    volumeSliderRef,
     handleSliderChange,
     handleVolumeChange,
   };

@@ -45,3 +45,4 @@
 ## TODO:
 
 maybe implement redux play/pause/next songs functions
+useAppSelector

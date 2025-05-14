@@ -22,6 +22,8 @@ export const AudioPlayer: React.FC = () => {
     duration,
     volume,
     volumeIcon,
+    audioSliderRef,
+    volumeSliderRef,
     handleVolumeChange,
     handleSliderChange,
   } = useAudioPlayer(
@@ -64,6 +66,8 @@ export const AudioPlayer: React.FC = () => {
             </div>
             <div className="slider">
               <input
+                ref={audioSliderRef}
+                style={{ background: "#292829" }}
                 type="range"
                 className="audio-slider"
                 min="0"
@@ -79,6 +83,7 @@ export const AudioPlayer: React.FC = () => {
           <div>
             <FontAwesomeIcon icon={volumeIcon} className="fa-fw volume-icon" />
             <input
+              ref={volumeSliderRef}
               type="range"
               className="volume-slider"
               min="0"
