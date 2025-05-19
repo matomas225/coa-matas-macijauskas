@@ -89,7 +89,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-bottom: 10px;
       .previous-button,
       .next-button {
         width: 16px;
@@ -117,11 +116,26 @@
     }
     .slider {
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0px;
+      padding: 0px;
+      p {
+        margin: 5px 0;
+        padding: 0;
+        color: $textGrey;
+        white-space: nowrap;
+        display: inline-block;
+        min-width: 32px;
+      }
+
       .audio-slider {
         -webkit-appearance: none;
         width: 100%;
         outline: none;
         accent-color: $accentColor;
+        margin: 0 5px;
         @include track-style;
 
         &::-webkit-slider-runnable-track {
@@ -164,18 +178,29 @@
   .song-time {
     display: flex;
     justify-content: end;
+    align-items: center;
     padding: 10px;
 
-    div {
-      display: flex;
-      align-items: center;
+    .volume-icon {
+      color: $iconGrey;
+    }
+    .volume-slider {
+      -webkit-appearance: none;
+      height: 6px;
+      background: linear-gradient(
+        to right,
+        $accentColorDarker 0%,
+        $accentColorDarker var(--volume, 100%),
+        $bgGrey var(--volume, 0%),
+        $bgGrey 100%
+      );
+      border-radius: 3px;
+      outline: none;
+      margin-left: 10px;
+      accent-color: $accentColorDarker;
+      cursor: pointer;
 
-      .volume-icon {
-        color: $iconGrey;
-      }
-      .volume-slider {
-        -webkit-appearance: none;
-        height: 6px;
+      &::-webkit-slider-runnable-track {
         background: linear-gradient(
           to right,
           $accentColorDarker 0%,
@@ -183,67 +208,46 @@
           $bgGrey var(--volume, 0%),
           $bgGrey 100%
         );
+        height: 6px;
         border-radius: 3px;
-        outline: none;
-        margin-left: 10px;
-        accent-color: $accentColorDarker;
-        cursor: pointer;
-
-        &::-webkit-slider-runnable-track {
-          background: linear-gradient(
-            to right,
-            $accentColorDarker 0%,
-            $accentColorDarker var(--volume, 100%),
-            $bgGrey var(--volume, 0%),
-            $bgGrey 100%
-          );
-          height: 6px;
-          border-radius: 3px;
-        }
-
-        &::-moz-range-track {
-          background: linear-gradient(
-            to right,
-            $accentColorDarker 0%,
-            $accentColorDarker var(--volume, 100%),
-            $bgGrey var(--volume, 0%),
-            $bgGrey 100%
-          );
-          height: 6px;
-          border-radius: 3px;
-        }
-
-        &::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          margin-top: -4px;
-          @include thumb-style;
-        }
-
-        &:hover::-webkit-slider-thumb {
-          @include on-thumb-hover;
-        }
-
-        &:focus::-webkit-slider-thumb {
-          @include on-thumb-hover;
-        }
-
-        &::-moz-range-thumb {
-          @include thumb-style;
-        }
-
-        &:hover::-moz-range-thumb {
-          @include on-thumb-hover;
-        }
-
-        &:focus::-moz-range-thumb {
-          @include on-thumb-hover;
-        }
       }
 
-      .song-time {
-        color: $textGrey;
-        width: 8ch;
-        white-space: nowrap;
+      &::-moz-range-track {
+        background: linear-gradient(
+          to right,
+          $accentColorDarker 0%,
+          $accentColorDarker var(--volume, 100%),
+          $bgGrey var(--volume, 0%),
+          $bgGrey 100%
+        );
+        height: 6px;
+        border-radius: 3px;
+      }
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        margin-top: -4px;
+        @include thumb-style;
+      }
+
+      &:hover::-webkit-slider-thumb {
+        @include on-thumb-hover;
+      }
+
+      &:focus::-webkit-slider-thumb {
+        @include on-thumb-hover;
+      }
+
+      &::-moz-range-thumb {
+        @include thumb-style;
+      }
+
+      &:hover::-moz-range-thumb {
+        @include on-thumb-hover;
+      }
+
+      &:focus::-moz-range-thumb {
+        @include on-thumb-hover;
       }
     }
   }

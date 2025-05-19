@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/state/store";
 import { isTokenExpired } from "@/utils/isTokenExpired";
-import { toast } from "react-toastify";
-import { t } from "@/utils/translateInFunction";
 
 type User = {
   username: string;
@@ -58,7 +56,6 @@ export const sessionSlice = createSlice({
       localStorage.removeItem("user");
       state.token = null;
       state.user = null;
-      toast.success(t("login.logedOut"));
     },
   },
 });

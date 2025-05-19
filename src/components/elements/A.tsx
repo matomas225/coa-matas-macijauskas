@@ -3,18 +3,20 @@ import "./elements.scss";
 
 type AProps = {
   href: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   children: ReactNode;
 };
 
-export const A: React.FC<AProps> = ({
-  children,
-  href,
-  onClick = () => null,
-}) => {
+export const A: React.FC<AProps> = ({ children, href, onClick = (e) => e }) => {
   return (
     <div className="a-container">
-      <a onClick={onClick} href={href}>
+      <a
+        onClick={(e) => {
+          e.preventDefault();
+          onClick?.(e);
+        }}
+        href={href}
+      >
         {children}
       </a>
     </div>

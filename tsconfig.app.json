@@ -29,12 +29,5 @@
       "@utils/*": ["src/utils/*"],
       "@elements/*": ["src/components/elements/*"]
     }
-  },
-
-  "include": [
-    "src",
-    "vitest.d.ts",
-    "src/render/components",
-    "src/render/elements"
-  ]
+  }
 }

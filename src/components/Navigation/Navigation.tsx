@@ -4,13 +4,13 @@ import { routes } from "@utils/routes";
 import Logo from "@/assets/logo-white.svg";
 import "./Navigation.scss";
 import { NavLink } from "react-router-dom";
-import { getUserState } from "../Login/sessionSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import { useAppDispatch } from "@/hooks/reduxHooks";
 import { ProfilePopup } from "../Profile/ProfilePopup";
 import { setProfilePopup } from "../Profile/profilePopupSlice";
+import { useLogin } from "@/hooks/useLogin";
 
 const Navigation: React.FC = () => {
-  const user = useAppSelector(getUserState);
+  const { user } = useLogin();
 
   const ref = useRef<HTMLLIElement>(null);
 

@@ -35,7 +35,7 @@ export const AudioPlayer: React.FC = () => {
   return (
     currentSongData &&
     currentSongId && (
-      <div className="audio-player">
+      <div className="audio-player" data-testid="audio-player">
         <audio ref={audioRef} id={currentSongId} />
         <div className="song-info">
           <img src={currentSongData.imagePath} alt="song-image" />
@@ -49,26 +49,31 @@ export const AudioPlayer: React.FC = () => {
           <div className="wrapper">
             <div className="buttons">
               <FontAwesomeIcon
+                data-testid="previous-button"
                 className="previous-button"
                 icon={faBackward}
                 onClick={handlePreviousSong}
               />
               <FontAwesomeIcon
+                data-testid="play-pause-button"
                 className="play-pause-button"
                 icon={songIcon()}
                 onClick={handlePlayPause}
               />
               <FontAwesomeIcon
+                data-testid="next-button"
                 className="next-button"
                 icon={faForward}
                 onClick={handleNextSong}
               />
             </div>
             <div className="slider">
+              <p>{formatTime(currentTime)}</p>
               <input
                 ref={audioSliderRef}
                 style={{ background: "#292829" }}
                 type="range"
+                data-testid="audio-slider"
                 className="audio-slider"
                 min="0"
                 max={duration}
@@ -76,26 +81,23 @@ export const AudioPlayer: React.FC = () => {
                 onChange={handleSliderChange}
                 step="0.1"
               />
+              <p>{formatTime(duration)}</p>
             </div>
           </div>
         </div>
         <div className="song-time">
-          <div>
-            <FontAwesomeIcon icon={volumeIcon} className="fa-fw volume-icon" />
-            <input
-              ref={volumeSliderRef}
-              type="range"
-              className="volume-slider"
-              min="0"
-              max="1"
-              value={volume}
-              onChange={handleVolumeChange}
-              step="0.1"
-            />
-            <p className="song-time">
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </p>
-          </div>
+          <FontAwesomeIcon icon={volumeIcon} className="fa-fw volume-icon" />
+          <input
+            ref={volumeSliderRef}
+            type="range"
+            data-testid="volume-slider"
+            className="volume-slider"
+            min="0"
+            max="1"
+            value={volume}
+            onChange={handleVolumeChange}
+            step="0.1"
+          />
         </div>
       </div>
     )

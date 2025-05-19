@@ -3,17 +3,18 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { useFormWithErrorHandling } from "@/hooks/useForm";
 import { loginFormRules } from "./loginFormRules";
-import { loginUser } from "./loginUser";
 import { InputWithLabel } from "../InputWithLabel/InputWithLabel";
 import { A } from "@elements/A";
 import { Button } from "@elements/Button";
 
 import "./Login.scss";
 import { changeValue } from "@/pages/Auth/authSlice";
+import { useLogin } from "@/hooks/useLogin";
 
 export const Login: React.FC = () => {
   const { register, handleSubmit, getErrorMessage, isSubmitting } =
     useFormWithErrorHandling();
+  const { loginUser } = useLogin();
 
   const formRules = loginFormRules();
 
