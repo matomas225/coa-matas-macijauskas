@@ -10,6 +10,8 @@ import {
 import { faCirclePause, faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { apiPaths } from "@/services/api";
+import { getTokenState } from "../Login/sessionSlice";
+import { setDisplayPopupCard } from "../PopupCard/popupCardSlice";
 
 type Songs = {
   id: string;
@@ -25,9 +27,14 @@ export const useSongsList = () => {
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector(getIsSongPlaying);
   const currentSongId = useAppSelector(getSongId);
+  const token = useAppSelector(getTokenState);
 
   const handleOnClick = useCallback(
     (songId: string) => {
+      if (!token) {
+        dispatch(setDisplayPopupCard(true));
+        return;
+      }
       if (songId !== currentSongId) {
         dispatch(setIsSongPlaying(true));
         dispatch(setSongId(songId));

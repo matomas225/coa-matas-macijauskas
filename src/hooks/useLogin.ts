@@ -11,6 +11,7 @@ import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { logoutUser } from "@/components/Login/sessionSlice";
+import { resetSongState } from "@/components/SongsList/songSlice";
 
 export const useLogin = () => {
   const user = useAppSelector(getUserState);
@@ -53,6 +54,7 @@ export const useLogin = () => {
       const logedIn = await isLoggedIn();
       if (!logedIn) {
         dispatch(logoutUser());
+        dispatch(resetSongState());
       }
     };
 

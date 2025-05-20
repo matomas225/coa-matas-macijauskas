@@ -12,6 +12,7 @@ import { PopupListItem } from "./PopupListItem";
 import { logoutUser } from "@/components/Login/sessionSlice";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { resetSongState } from "../SongsList/songSlice";
 
 type ProfilePopupProps = {
   ignoreRef?: React.RefObject<HTMLLIElement | null>;
@@ -44,6 +45,7 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
       onClick: () => {
         dispatch(logoutUser());
         dispatch(closeProfilePopup());
+        dispatch(resetSongState());
         toast.success(t("login.logedOut"));
       },
     },

@@ -1,0 +1,84 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 20, 0.85); // darker overlay
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-card {
+  background: $bgGrey; // use your dark background variable
+  border-radius: 16px;
+  padding: 35px;
+  min-width: 320px;
+  max-width: 90vw;
+  position: relative;
+  text-align: center;
+  color: $textPrimary; // light text
+  font-family: "circular-medium";
+}
+
+.popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: $accentColor;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    color: $accentColorDarker;
+    transform: scale(1.1);
+  }
+}
+
+.popup-text {
+  color: $textPrimary;
+  font-size: 28px;
+}
+
+.popup-subtext {
+  color: $textGrey;
+}
+
+.popup-buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.popup-login {
+  text-decoration: none;
+  padding: 10px 60px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  background: $accentColor;
+  color: $textPrimary;
+  cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    background: $accentColorDarker;
+  }
+}
+
+.popup-register {
+  text-decoration: none;
+  padding: 10px 60px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  background: $accentColor;
+  color: $textPrimary;
+  cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    background: $accentColorDarker;
+  }
+}

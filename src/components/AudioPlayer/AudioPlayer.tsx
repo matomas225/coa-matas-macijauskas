@@ -17,6 +17,7 @@ export const AudioPlayer: React.FC = () => {
   } = useCurrentSong();
 
   const {
+    token,
     audioRef,
     currentTime,
     duration,
@@ -34,7 +35,8 @@ export const AudioPlayer: React.FC = () => {
 
   return (
     currentSongData &&
-    currentSongId && (
+    currentSongId &&
+    token && (
       <div className="audio-player" data-testid="audio-player">
         <audio ref={audioRef} id={currentSongId} />
         <div className="song-info">

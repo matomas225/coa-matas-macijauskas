@@ -1,15 +1,18 @@
+import { useAppSelector } from "@/hooks/reduxHooks";
 import {
   faVolumeHigh,
   faVolumeLow,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useRef, useState } from "react";
+import { getTokenState } from "../Login/sessionSlice";
 
 export const useAudioPlayer = (
   songPath: string,
   isPlaying: boolean,
   currentSongId: string | null
 ) => {
+  const token = useAppSelector(getTokenState);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioSliderRef = useRef<HTMLInputElement | null>(null);
   const volumeSliderRef = useRef<HTMLInputElement | null>(null);
@@ -76,8 +79,11 @@ export const useAudioPlayer = (
     const audio = audioRef.current;
 
     if (!audio) return;
+    if (!token) return;
 
-    audio.src = songPath;
+    const songPathWithToken = `${songPath}?token=${token}`;
+
+    audio.src = songPathWithToken;
     audio.currentTime = 0;
 
     if (isPlaying) {
@@ -89,6 +95,7 @@ export const useAudioPlayer = (
     const audio = audioRef.current;
 
     if (!audio) return;
+    if (!token) return;
 
     if (isPlaying) {
       audio?.play();
@@ -98,6 +105,7 @@ export const useAudioPlayer = (
   }, [isPlaying]);
 
   return {
+    token,
     audioRef,
     currentTime,
     duration,

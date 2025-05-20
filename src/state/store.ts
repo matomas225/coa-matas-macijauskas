@@ -1,4 +1,5 @@
 import { sessionSlice } from "@/components/Login/sessionSlice";
+import { popupCardSlice } from "@/components/PopupCard/popupCardSlice";
 import { profilePopupSlice } from "@/components/Profile/profilePopupSlice";
 import { songSlice } from "@/components/SongsList/songSlice";
 import { authSlice } from "@/pages/Auth/authSlice";
@@ -10,6 +11,7 @@ const store = configureStore({
     session: sessionSlice.reducer,
     profilePopup: profilePopupSlice.reducer,
     songState: songSlice.reducer,
+    popupCardState: popupCardSlice.reducer,
   },
 });
 

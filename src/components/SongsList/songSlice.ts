@@ -41,6 +41,7 @@ export const songSlice = createSlice({
         state.songsList = action.payload;
       }
     },
+    resetSongState: () => initialState,
   },
 });
 
@@ -48,6 +49,7 @@ export const getIsSongPlaying = (state: RootState) => state.songState.isPlaying;
 export const getSongId = (state: RootState) => state.songState.songId;
 export const getSongsList = (state: RootState) => state.songState.songsList;
 
-export const { setIsSongPlaying, setSongId, setSongsList } = songSlice.actions;
+export const { setIsSongPlaying, setSongId, setSongsList, resetSongState } =
+  songSlice.actions;
 
 export default songSlice.reducer;
