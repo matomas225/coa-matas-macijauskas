@@ -1,0 +1,126 @@
+.upload-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.song-upload-card {
+  position: relative;
+  max-width: 600px;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: $bgDark;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid $bgLightGrey;
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: $textGrey;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $textPrimary;
+    }
+  }
+
+  h2 {
+    margin-bottom: 1.5rem;
+    color: $textPrimary;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .label-container{
+      label{
+        color: $textGrey;
+      }
+    }
+
+    .file-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      input[type="file"] {
+        padding: 0.75rem;
+        border: 1px solid $bgLightGrey;
+        border-radius: 4px;
+        background: $bgGrey;
+        color: $textPrimary;
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+
+        &:hover {
+          border-color: $accentColor;
+        }
+
+        &::-webkit-file-upload-button {
+          background: $bgLightGrey;
+          border: none;
+          border-radius: 4px;
+          padding: 0.5rem 1rem;
+          color: $textPrimary;
+          cursor: pointer;
+          margin-right: 1rem;
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background: $accentColor;
+          }
+        }
+      }
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: $accentColor;
+      color: $textPrimary;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+
+      &:hover:not(:disabled) {
+        background: $accentColorDarker;
+      }
+
+      &:disabled {
+        background: $bgLightGrey;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+    margin: 1rem;
+    padding: 1.5rem;
+
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+}

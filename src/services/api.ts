@@ -8,4 +8,5 @@ export const apiPaths = {
   loginUser: `${users}/loginUser`,
   isLogedIn: `${users}/isLogedIn`,
   getSongs: `${songs}`,
+  uploadSong: `${songs}/upload`,
 };

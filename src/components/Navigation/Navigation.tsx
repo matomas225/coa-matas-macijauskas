@@ -5,8 +5,8 @@ import Logo from "@/assets/logo-white.svg";
 import "./Navigation.scss";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "@/hooks/reduxHooks";
-import { ProfilePopup } from "../Profile/ProfilePopup";
-import { setProfilePopup } from "../Profile/profilePopupSlice";
+import { ProfilePopup } from "../ProfilePopup/ProfilePopup";
+import { setProfilePopup } from "../ProfilePopup/profilePopupSlice";
 import { useLogin } from "@/hooks/useLogin";
 
 const Navigation: React.FC = () => {

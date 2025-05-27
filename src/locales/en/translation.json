@@ -38,5 +38,38 @@
       "username": "Username is required",
       "password": "Password is required"
     }
+  },
+  "song": {
+    "title": {
+      "upload": "Upload New Song"
+    },
+    "fields": {
+      "title": "Song Title",
+      "artist": "Artist Name",
+      "album": "Album Name",
+      "songFile": "Song File",
+      "coverImage": "Cover Image"
+    },
+    "buttons": {
+      "upload": "Upload Song",
+      "uploading": "Uploading..."
+    },
+    "errors": {
+      "titleRequired": "Song title is required",
+      "titleMinLength": "Title must be at least 2 characters long",
+      "titleMaxLength": "Title must be less than 100 characters",
+      "artistRequired": "Artist name is required",
+      "artistMinLength": "Artist name must be at least 2 characters long",
+      "artistMaxLength": "Artist name must be less than 100 characters",
+      "albumMaxLength": "Album name must be less than 100 characters",
+      "invalidAudioFile": "Please upload a valid audio file",
+      "invalidImageFile": "Please upload a valid image file",
+      "songFileRequired": "Please select a song file to upload",
+      "imageFileRequired": "Please select a cover image",
+      "uploadFailed": "Failed to upload song. Please try again."
+    },
+    "success": {
+      "uploaded": "Song uploaded successfully!"
+    }
   }
 }

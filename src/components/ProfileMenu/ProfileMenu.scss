@@ -1,0 +1,30 @@
+.profile-menu {
+  h1 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+  box-sizing: border-box;
+  background: $gradientGrey;
+  box-shadow: -1px 0px 15px -3px rgb(0, 0, 0);
+  color: $textPrimary;
+  border-radius: 6px;
+  display: flex;
+  padding: 40px;
+  flex-direction: column;
+  justify-self: center;
+  margin-top: 50px;
+  width: 600px;
+
+  .profile-menu-item {
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      margin: 0;
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -104,6 +104,13 @@ export const useAudioPlayer = (
     }
   }, [isPlaying]);
 
+  useEffect(() => {
+    if (!songPath) {
+      setVolumeIcon(faVolumeHigh);
+      setVolume(1);
+    }
+  }, [songPath]);
+
   return {
     token,
     audioRef,

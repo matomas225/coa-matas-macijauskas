@@ -13,6 +13,7 @@ import { logoutUser } from "@/components/Login/sessionSlice";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { resetSongState } from "../SongsList/songSlice";
+import { routes } from "@/utils/routes";
 
 type ProfilePopupProps = {
   ignoreRef?: React.RefObject<HTMLLIElement | null>;
@@ -34,14 +35,23 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
     {
       name: "Profile",
       icon: faUser,
+      link: routes.profile,
+      onClick: () => {
+        dispatch(closeProfilePopup());
+      },
     },
     {
       name: "Settings",
       icon: faGear,
+      link: "#",
+      onClick: () => {
+        dispatch(closeProfilePopup());
+      },
     },
     {
       name: "Logout",
       icon: faArrowRightFromBracket,
+      link: routes.home,
       onClick: () => {
         dispatch(logoutUser());
         dispatch(closeProfilePopup());
@@ -61,6 +71,7 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
                 <PopupListItem
                   name={item.name}
                   icon={item.icon}
+                  link={item.link}
                   onClick={item?.onClick}
                   key={i}
                 />
