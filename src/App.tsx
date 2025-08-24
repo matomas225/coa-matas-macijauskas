@@ -9,6 +9,7 @@ import { routes } from "@utils/routes";
 import { Profile } from "./pages/Profile/Profile";
 import { AudioPlayer } from "./components/AudioPlayer/AudioPlayer";
 import { useLogin } from "./hooks/useLogin";
+import { AlbumPage } from "./components/Albums/AlbumPage";
 
 const App: React.FC = () => {
   const { user } = useLogin();
@@ -21,6 +22,7 @@ const App: React.FC = () => {
           <>
             <Route path={routes.profile} element={<Profile />} />
             <Route path={routes.auth} element={<Navigate to={routes.home} />} />
+            <Route path={routes.album} element={<AlbumPage />} />
           </>
         ) : (
           <>

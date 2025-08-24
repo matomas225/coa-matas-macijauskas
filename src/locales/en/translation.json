@@ -41,7 +41,8 @@
   },
   "song": {
     "title": {
-      "upload": "Upload New Song"
+      "upload": "Upload New Song",
+      "update": "Update Song"
     },
     "fields": {
       "title": "Song Title",
@@ -52,7 +53,9 @@
     },
     "buttons": {
       "upload": "Upload Song",
-      "uploading": "Uploading..."
+      "uploading": "Uploading...",
+      "update": "Update Song",
+      "updating": "Updating..."
     },
     "errors": {
       "titleRequired": "Song title is required",
@@ -66,10 +69,13 @@
       "invalidImageFile": "Please upload a valid image file",
       "songFileRequired": "Please select a song file to upload",
       "imageFileRequired": "Please select a cover image",
-      "uploadFailed": "Failed to upload song. Please try again."
+      "uploadFailed": "Failed to upload song. Please try again.",
+      "updateFailed": "Failed to update song. Please try again.",
+      "noSongSelected": "No song selected for update"
     },
     "success": {
-      "uploaded": "Song uploaded successfully!"
+      "uploaded": "Song uploaded successfully!",
+      "updated": "Song updated successfully!"
     }
   }
 }

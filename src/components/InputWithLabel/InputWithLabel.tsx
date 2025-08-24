@@ -15,6 +15,7 @@ type InputWithLabelProps = {
   rules?: RegisterOptions;
   error?: string;
   value?: string;
+  defaultValue?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   accept?: string;
 };
@@ -31,6 +32,7 @@ export const InputWithLabel: React.FC<InputWithLabelProps> = ({
   rules = {},
   error = undefined,
   value,
+  defaultValue,
   onChange,
   accept,
 }) => {
@@ -47,6 +49,7 @@ export const InputWithLabel: React.FC<InputWithLabelProps> = ({
         placeholder={placeholder}
         required={required}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
         accept={accept}
       />

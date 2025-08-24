@@ -12,6 +12,7 @@ type InputProps = {
   rules?: RegisterOptions;
   error?: string;
   value?: string;
+  defaultValue?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   accept?: string;
 };
@@ -26,6 +27,7 @@ export const Input: React.FC<InputProps> = ({
   rules = {},
   error = undefined,
   value,
+  defaultValue,
   onChange,
   accept,
 }) => {
@@ -42,6 +44,7 @@ export const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         required={required}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
         accept={accept}
       />

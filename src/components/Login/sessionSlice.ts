@@ -3,6 +3,7 @@ import type { RootState } from "@/state/store";
 import { isTokenExpired } from "@/utils/isTokenExpired";
 
 type User = {
+  id: string;
   username: string;
   email: string;
 };

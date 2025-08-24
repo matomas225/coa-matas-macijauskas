@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { setUploadPopupOpen } from "@/components/SongUploadCard/songUploadSlice";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { apiPaths } from "@/services/api";
 import { t } from "@/utils/translateInFunction";
+import { getTokenState } from "../Login/sessionSlice";
 
 export const useSongUpload = () => {
   const [songFile, setSongFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const token = useAppSelector(getTokenState);
 
   const handleClose = () => {
     dispatch(setUploadPopupOpen(false));
@@ -18,19 +20,22 @@ export const useSongUpload = () => {
     setImageFile(null);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'song' | 'image') => {
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: "song" | "image"
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (type === 'song') {
-      if (!file.type.startsWith('audio/')) {
-        toast.error(t('song.errors.invalidAudioFile'));
+    if (type === "song") {
+      if (!file.type.startsWith("audio/")) {
+        toast.error(t("song.errors.invalidAudioFile"));
         return;
       }
       setSongFile(file);
     } else {
-      if (!file.type.startsWith('image/')) {
-        toast.error(t('song.errors.invalidImageFile'));
+      if (!file.type.startsWith("image/")) {
+        toast.error(t("song.errors.invalidImageFile"));
         return;
       }
       setImageFile(file);
@@ -39,12 +44,12 @@ export const useSongUpload = () => {
 
   const uploadSong = async (formData: any) => {
     if (!songFile) {
-      toast.error(t('song.errors.songFileRequired'));
+      toast.error(t("song.errors.songFileRequired"));
       return;
     }
 
     if (!imageFile) {
-      toast.error(t('song.errors.imageFileRequired'));
+      toast.error(t("song.errors.imageFileRequired"));
       return;
     }
 
@@ -52,23 +57,26 @@ export const useSongUpload = () => {
 
     try {
       const formPayload = new FormData();
-      formPayload.append('title', formData.title);
-      formPayload.append('artist', formData.artist);
-      formPayload.append('album', formData.album || '');
-      formPayload.append('songFile', songFile);
-      formPayload.append('imageFile', imageFile);
+      formPayload.append("title", formData.title);
+      formPayload.append("artist", formData.artist);
+      formPayload.append("album", formData.album || "");
+      formPayload.append("songFile", songFile);
+      formPayload.append("imageFile", imageFile);
 
       await axios.post(apiPaths.uploadSong, formPayload, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       });
 
-      toast.success(t('song.success.uploaded'));
+      dispatch(setUploadPopupOpen(false));
+
+      toast.success(t("song.success.uploaded"));
       handleClose();
     } catch (error) {
-      toast.error(t('song.errors.uploadFailed'));
-      console.error('Upload error:', error);
+      toast.error(t("song.errors.uploadFailed"));
+      console.error("Upload error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -80,6 +88,6 @@ export const useSongUpload = () => {
     isLoading,
     handleClose,
     handleFileChange,
-    uploadSong
+    uploadSong,
   };
-}; 
+};

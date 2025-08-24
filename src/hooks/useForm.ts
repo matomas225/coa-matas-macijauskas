@@ -6,6 +6,7 @@ export const useFormWithErrorHandling = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     getValues,
+    setValue,
   } = useForm();
 
   const getErrorMessage = (fieldName: string): string | undefined => {
@@ -19,5 +20,6 @@ export const useFormWithErrorHandling = () => {
     getValues,
     getErrorMessage,
     isSubmitting,
+    setValue,
   };
 };
