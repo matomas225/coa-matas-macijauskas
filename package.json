@@ -51,6 +51,7 @@
     "globals": "^15.15.0",
     "identity-obj-proxy": "^3.0.0",
     "jsdom": "^26.0.0",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.24.1",

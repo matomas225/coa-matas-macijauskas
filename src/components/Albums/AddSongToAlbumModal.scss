@@ -1,0 +1,39 @@
+.add-song-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.add-song-modal {
+  background: $bgDark;
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 400px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.close-modal {
+  float: right;
+  margin-bottom: 1rem;
+}
+.songs-table {
+  width: 100%;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: 0.5rem;
+    text-align: left;
+    color: $textPrimary;
+  }
+  tr {
+    border-bottom: 1px solid $bgGrey;
+  }
+  img {
+    border-radius: 4px;
+  }
+}
