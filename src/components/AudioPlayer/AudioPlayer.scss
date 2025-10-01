@@ -14,7 +14,10 @@
   border: none;
   opacity: 0;
   transform: scale(0.8);
-  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
@@ -63,13 +66,13 @@
         margin: 0;
         font-size: 14px;
         color: $textPrimary;
-        font-family: "circular-light";
+        font-family: 'circular-light';
       }
       .song-artist {
         margin: 0;
         font-size: 12px;
         color: $textGrey;
-        font-family: "circular-light";
+        font-family: 'circular-light';
       }
     }
   }

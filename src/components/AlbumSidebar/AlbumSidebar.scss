@@ -1,0 +1,198 @@
+.album-sidebar {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    pointer-events: auto;
+  }
+
+  &__panel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: min(420px, 92vw);
+    background: #111318;
+    color: #f1f3f5;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    animation: slideIn 220ms ease-out;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .album-sidebar__album {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .album-sidebar__artist {
+      font-size: 12px;
+      color: #a9b0b8;
+    }
+  }
+
+  &__close {
+    background: transparent;
+    border: none;
+    color: #cbd2d9;
+    font-size: 20px;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 120ms ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &__hero {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 14px;
+    align-items: center;
+
+    img {
+      padding-left: 0;
+      width: 104px;
+      height: 104px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .album-sidebar__now-playing {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .label {
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #8a94a3;
+      }
+
+      .track {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      .artist {
+        font-size: 13px;
+        color: #a9b0b8;
+      }
+    }
+  }
+
+  &__list {
+    padding: 8px 8px 16px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 48px 1fr 28px;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: inherit;
+    text-align: left;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition:
+      background 140ms ease,
+      transform 80ms ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.active {
+      background: rgba(81, 132, 255, 0.14);
+
+      .title {
+        color: #ffffff;
+      }
+    }
+
+    .cover {
+      padding-left: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .meta {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      .title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #e6ebf0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .artist {
+        font-size: 12px;
+        color: #98a1ad;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    .control {
+      color: #c8d0da;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

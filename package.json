@@ -1,15 +1,17 @@
 {
-  "name": "coa-matas-macijauskas",
+  "name": "soundify",
   "private": true,
-  "version": "0.0.0",
+  "version": "3.2.1",
   "type": "module",
+  "main": "main.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "electron:start": "electron ."
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -19,6 +21,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@reduxjs/toolkit": "^2.6.1",
     "axios": "^1.8.4",
+    "electron": "^38.2.0",
     "i18next": "^24.2.3",
     "jwt-decode": "^4.0.0",
     "react": "^19.0.0",

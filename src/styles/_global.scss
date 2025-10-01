@@ -1,40 +1,65 @@
-@use "variables" as *;
+@use 'variables' as *;
 
 @font-face {
-  font-family: "circular-black";
-  src: url("/src/assets/fonts/circular-black.ttf") format("truetype");
+  font-family: 'circular-black';
+  src: url('/src/assets/fonts/circular-black.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "circular-bold";
-  src: url("/src/assets/fonts/circular-bold.ttf") format("truetype");
+  font-family: 'circular-bold';
+  src: url('/src/assets/fonts/circular-bold.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "circular-medium";
-  src: url("/src/assets/fonts/circular-medium.ttf") format("truetype");
+  font-family: 'circular-medium';
+  src: url('/src/assets/fonts/circular-medium.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
-  font-family: "circular-light";
-  src: url("/src/assets/fonts/circular-light.ttf") format("truetype");
+  font-family: 'circular-light';
+  src: url('/src/assets/fonts/circular-light.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
 
 html {
-  font-family: "circular-medium";
+  font-family: 'circular-medium';
   color: $textPrimary;
 }
 
 body {
+  padding-bottom: 90px;
+  overflow: auto;
   background-color: $bgDark;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $accentColor;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $accentColorDarker;
+}
+
+::-webkit-scrollbar-track {
+  background: $bgDark;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track:hover {
+  background: $bgGrey;
 }
 
 h1,

@@ -1,7 +1,7 @@
-const API_URL = import.meta.env.VITE_API_URL;
-const users = `${API_URL}/users`;
-const songs = `${API_URL}/songs`;
-const albums = `${API_URL}/albums`;
+const API_URL = import.meta.env.VITE_API_URL
+const users = `${API_URL}/users`
+const songs = `${API_URL}/songs`
+const albums = `${API_URL}/albums`
 
 export const apiPaths = {
   getUsers: `${users}/getUsers`,
@@ -15,8 +15,9 @@ export const apiPaths = {
   getSong: `${songs}/song`,
   updateSong: `${songs}/user-songs`,
   getAlbums: `${albums}/`,
+  getAllAlbums: `${albums}/all`,
   createAlbum: `${albums}/create`,
   addSongToAlbum: `${albums}/add-song`,
   removeSongFromAlbum: `${albums}/remove-song`,
   getAlbumCover: `${albums}/cover`,
-};
+}

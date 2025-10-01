@@ -1,5 +1,11 @@
 import React from 'react'
-import { BrowserRouter, Navigate, Route, Routes, useNavigate, } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from 'react-router-dom'
 import { Slide, ToastContainer } from 'react-toastify'
 import Navigation from '@/components/Navigation/Navigation'
 import NotFound from '@/pages/NotFound/NotFound'
@@ -14,6 +20,7 @@ import { isTokenExpired } from '@utils/isTokenExpired'
 import axios from 'axios'
 import { getTokenState, setToken } from '@/components/Login/sessionSlice'
 import { AlbumPage } from '@/components/Albums/AlbumPage'
+import AlbumSidebar from '@/components/AlbumSidebar/AlbumSidebar.tsx'
 
 // Split into two components so hooks like useNavigate live inside the router
 const AppRoutes: React.FC = () => {
@@ -94,6 +101,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Navigation />
       <AppRoutes />
+      <AlbumSidebar />
       <AudioPlayer />
       <ToastContainer
         position="bottom-left"
