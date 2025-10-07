@@ -1,5 +1,4 @@
 import './AlbumList.scss'
-import PlaceholderImg from '@/assets/placeholder-album.png'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { apiPaths } from '@/services/api.ts'
@@ -12,6 +11,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks.ts'
 import { getTokenState } from '@/components/Login/sessionSlice'
 import { setDisplayPopupCard } from '@/components/PopupCard/popupCardSlice'
+import { AlbumsCarousel } from './AlbumsCarousel'
 
 export const AlbumList = () => {
   const dispatch = useAppDispatch()
@@ -35,27 +35,18 @@ export const AlbumList = () => {
     fetchAlbums()
   }, [dispatch])
 
+  if (!albums || albums.length === 0) {
+    return (
+      <div className="album-list-empty">
+        <p>No albums yet</p>
+      </div>
+    )
+  }
+
   return (
     <div className="album-list-wrapper">
       <h1>Popular Albums</h1>
-      <div className="album-list">
-        {albums?.map((album) => (
-          <div
-            key={album._id}
-            className="album-item"
-            onClick={() => handleAlbumClick(album._id)}
-          >
-            <img
-              src={album.coverImagePath || PlaceholderImg}
-              alt={album.title}
-            />
-            <div className="album-details">
-              <h2>{album.title}</h2>
-              <p>{album.artist}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      <AlbumsCarousel albums={albums} onAlbumClick={handleAlbumClick} />
     </div>
   )
 }

@@ -13,15 +13,34 @@
   }
 }
 
-.songs {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 16px;
-  padding: 10px;
+/* Songs carousel styles are now in SongsCarousel.scss */
+
+.songs-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  color: $textGrey;
+  font-size: 18px;
+  font-family: 'circular-light';
+  padding: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    min-height: 150px;
+    padding: 25px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 15px;
+    min-height: 120px;
+    padding: 20px;
+  }
 }
 
 .card-wrapper {
   padding: 10px;
+  padding-left: 0;
   border-radius: 6px;
   cursor: pointer;
   width: 100%;
@@ -44,7 +63,7 @@
       object-fit: cover;
     }
   }
-  
+
   .play-icon {
     color: $accentColorDarker;
     width: 35px;
@@ -62,21 +81,21 @@
       transform: scale(1.1);
     }
   }
-  
+
   h3 {
     margin: 6px 0 4px 0;
     color: $textPrimary;
-    font-family: "circular-light";
+    font-family: 'circular-light';
     font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
+
   p {
     margin: 0;
     color: $textGrey;
-    font-family: "circular-light";
+    font-family: 'circular-light';
     font-size: 12px;
     white-space: nowrap;
     overflow: hidden;

@@ -1,5 +1,5 @@
 import { RootState } from '@/state/store'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type SongsList = {
   artist: string
@@ -25,7 +25,7 @@ export const songSlice = createSlice({
   name: 'songState',
   initialState,
   reducers: {
-    setIsSongPlaying: (state, action: { payload?: boolean }) => {
+    setIsSongPlaying: (state, action: PayloadAction<boolean | undefined>) => {
       // Correctly respect explicit boolean payloads, including false
       if (typeof action.payload === 'boolean') {
         state.isPlaying = action.payload

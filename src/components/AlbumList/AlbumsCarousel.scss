@@ -1,0 +1,213 @@
+.albums-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.albums-carousel {
+  margin: 0 10px 0 10px;
+  gap: 12px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  /* Focus styles for accessibility */
+  &:focus {
+    outline: 2px solid $accentColor;
+    outline-offset: 2px;
+  }
+
+  /* Enhanced visual feedback during interactions */
+  &.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+
+    .carousel-item {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+  }
+
+  &.scrolling {
+    scroll-behavior: smooth;
+
+    .carousel-item {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &:not(.dragging):not(.scrolling) {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    min-width: 200px;
+    max-width: 200px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .album-item {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+
+      img {
+        width: 100% !important;
+        height: 200px !important;
+        object-fit: cover !important;
+        border-radius: 6px !important;
+        padding: 0 !important;
+      }
+
+      .album-details {
+        gap: 1px;
+        margin-left: 0;
+        padding: 0;
+        h2 {
+          margin: 4px 0 2px 0;
+          font-size: 16px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $textPrimary;
+          font-family: 'circular-light';
+        }
+
+        p {
+          margin: 0;
+          font-size: 14px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $textGrey;
+          font-family: 'circular-light';
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      min-width: 180px;
+      max-width: 180px;
+
+      .album-item {
+        padding: 8px 8px 8px 0;
+
+        img {
+          height: 180px !important;
+        }
+
+        .album-details {
+          h2 {
+            font-size: 15px;
+          }
+
+          p {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 480px) {
+      min-width: 160px;
+      max-width: 160px;
+
+      .album-item {
+        padding: 8px 8px 8px 0;
+
+        img {
+          height: 160px !important;
+        }
+
+        .album-details {
+          h2 {
+            font-size: 14px;
+          }
+
+          p {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  /* Scroll indicators for better UX */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Show scroll indicators when content overflows */
+  &:has(+ .albums-carousel-wrapper &::after),
+  &:has(+ .albums-carousel-wrapper &::before) {
+    &::after,
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+/* Mobile touch optimizations */
+@media (max-width: 768px) {
+  .albums-carousel {
+    gap: 12px;
+    padding: 8px 0;
+
+    .carousel-item {
+      min-width: 180px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .albums-carousel {
+    gap: 10px;
+    padding: 6px 0;
+
+    .carousel-item {
+      min-width: 160px;
+    }
+  }
+}

@@ -1,0 +1,234 @@
+.songs-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.songs-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 10px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  /* Focus styles for accessibility */
+  &:focus {
+    outline: 2px solid $accentColor;
+    outline-offset: 2px;
+  }
+
+  /* Enhanced visual feedback during interactions */
+  &.dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+
+    .carousel-item {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+  }
+
+  &.scrolling {
+    scroll-behavior: smooth;
+
+    .carousel-item {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &:not(.dragging):not(.scrolling) {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    min-width: 175px;
+    max-width: 175px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    .card-wrapper {
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+
+      .image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 175px;
+        aspect-ratio: 1;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 6px;
+        }
+      }
+
+      .play-icon {
+        color: $accentColorDarker;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        transition: all 0.2s ease;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          color: $accentColor;
+          transform: scale(1.1);
+        }
+      }
+
+      h3 {
+        margin: 6px 0 4px 0;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p {
+        margin: 0;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    @media (max-width: 768px) {
+      min-width: 160px;
+      max-width: 160px;
+
+      .card-wrapper {
+        .image-wrapper {
+          height: 160px;
+        }
+
+        .play-icon {
+          width: 32px;
+          height: 32px;
+          bottom: 8px;
+          right: 8px;
+        }
+      }
+    }
+
+    @media (max-width: 480px) {
+      min-width: 140px;
+      max-width: 140px;
+
+      .card-wrapper {
+        padding: 8px;
+
+        .image-wrapper {
+          height: 140px;
+        }
+
+        .play-icon {
+          width: 28px;
+          height: 28px;
+          bottom: 6px;
+          right: 6px;
+          padding: 6px;
+        }
+
+        h3 {
+          font-size: 13px;
+        }
+
+        p {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  /* Scroll indicators for better UX */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.1), transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Show scroll indicators when content overflows */
+  &:has(+ .songs-carousel-wrapper &::after),
+  &:has(+ .songs-carousel-wrapper &::before) {
+    &::after,
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+/* Mobile touch optimizations */
+@media (max-width: 768px) {
+  .songs-carousel {
+    gap: 12px;
+    padding: 8px 0;
+
+    .carousel-item {
+      min-width: 160px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .songs-carousel {
+    gap: 10px;
+    padding: 6px 0;
+
+    .carousel-item {
+      min-width: 140px;
+    }
+  }
+}

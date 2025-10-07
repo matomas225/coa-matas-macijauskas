@@ -14,9 +14,17 @@ export const useCurrentSong = () => {
   const songsList = useAppSelector(getSongsList) ?? []
   const currentSongId = useAppSelector(getSongId)
 
+  // Find the current song data
   const currentSongIndex = songsList.findIndex((s) => s?.id === currentSongId)
   const currentSongData =
     currentSongIndex >= 0 ? songsList[currentSongIndex] : null
+
+  // Debug logging (remove in production)
+  console.log('Current song data:', {
+    currentSongId,
+    currentSongData,
+    songsListLength: songsList.length,
+  })
 
   const handlePreviousSong = () => {
     if (!songsList.length) return

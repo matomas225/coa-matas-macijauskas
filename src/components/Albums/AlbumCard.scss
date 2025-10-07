@@ -1,15 +1,23 @@
-@use "@/styles/variables" as *;
+@use '@/styles/variables' as *;
 
 .album-card {
   background: $bgGrey;
   border-radius: 12px;
-  padding: 1.5rem;
   min-width: 320px;
   max-width: 400px;
   color: $textPrimary;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
   text-align: center;
-  font-family: "circular-medium";
+  font-family: 'circular-medium';
+
+  @media (max-width: 480px) {
+    min-width: 280px;
+    max-width: 350px;
+  }
+  img {
+    margin-left: 0;
+    margin: 0;
+  }
   .album-cover {
     width: 100%;
     height: 200px;
@@ -18,17 +26,12 @@
     margin-bottom: 1rem;
   }
   h2 {
-    margin: 0.5rem 0 0.25rem 0;
     color: $accentColor;
     font-size: 1.3rem;
   }
   p {
-    margin: 0 0 1rem 0;
     color: $textGrey;
     font-size: 1rem;
-  }
-  img {
-    padding: 0;
   }
   .album-songs {
     margin-top: 1rem;

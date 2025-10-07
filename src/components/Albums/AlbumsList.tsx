@@ -25,8 +25,6 @@ export const AlbumsList: React.FC = () => {
     fetchAlbums()
   }, [dispatch])
 
-  console.log(albums)
-
   return (
     <div className="albums-list">
       {albums?.map((album) => (

@@ -30,7 +30,11 @@ export const AddSongToAlbumModal: React.FC<AddSongToAlbumModalProps> = ({
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         if (res.data) {
-          dispatch(setSongsList(res.data))
+          const normalizedSongs = res.data.map((song: any) => ({
+            ...song,
+            id: song._id || song.id,
+          }))
+          dispatch(setSongsList(normalizedSongs))
         }
       } catch (e) {
         console.error('Failed to fetch user songs', e)

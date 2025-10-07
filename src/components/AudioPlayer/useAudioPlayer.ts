@@ -118,11 +118,11 @@ export const useAudioPlayer = (
 
     const setSrc = (src: string) => {
       if (loadTokenRef.current !== myToken) return // stale async
-      // Assignment is enough; browsers autoload. Avoid load() to reduce races.
       audio.src = src
       audio.currentTime = 0
       // keep current volume
       audio.volume = volume
+      audio.load()
     }
 
     const hasQueryToken = /\btoken=/.test(songPath)
@@ -180,30 +180,32 @@ export const useAudioPlayer = (
     if (!audio) return
 
     const tryPlay = () => {
-      const p = audio.play()
-      if (p && typeof p.catch === 'function') {
-        p.catch((err: any) => {
-          if (err?.name === 'AbortError') return // benign race
-          if (err?.name === 'NotAllowedError') {
-            console.warn('Autoplay blocked; needs a user gesture.')
-            return
-          }
+      setTimeout(() => {
+        const p = audio.play()
+        if (p && typeof p.catch === 'function') {
+          p.catch((err: any) => {
+            if (err?.name === 'AbortError') return // benign race
+            if (err?.name === 'NotAllowedError') {
+              console.warn('Autoplay blocked; needs a user gesture.')
+              return
+            }
 
-          console.warn('audio.play() failed:', err)
-        })
-      }
+            console.warn('audio.play() failed:', err)
+          })
+        }
+      }, 200)
     }
 
     if (isPlaying) {
-      if (audio.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      if (audio.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
         tryPlay()
       } else {
-        const onCanPlay = () => {
+        const onLoadedData = () => {
           if (shouldPlayRef.current) tryPlay()
-          audio.removeEventListener('canplay', onCanPlay)
+          audio.removeEventListener('loadeddata', onLoadedData)
         }
-        audio.addEventListener('canplay', onCanPlay)
-        return () => audio.removeEventListener('canplay', onCanPlay)
+        audio.addEventListener('loadeddata', onLoadedData)
+        return () => audio.removeEventListener('loadeddata', onLoadedData)
       }
     } else {
       audio.pause()
@@ -221,17 +223,20 @@ export const useAudioPlayer = (
 
     const tryPlay = () => {
       if (cancelled) return
-      const p = audio.play()
-      if (p && typeof p.catch === 'function') {
-        p.catch((err: any) => {
-          if (err?.name === 'AbortError') return
-          if (err?.name === 'NotAllowedError') {
-            console.warn('Autoplay blocked; needs a user gesture.')
-            return
-          }
-          console.warn('audio.play() failed:', err)
-        })
-      }
+      setTimeout(() => {
+        const p = audio.play()
+        if (p && typeof p.catch === 'function') {
+          p.catch((err: any) => {
+            if (err?.name === 'AbortError') return
+            if (err?.name === 'NotAllowedError') {
+              console.warn('Autoplay blocked; needs a user gesture.')
+              return
+            }
+
+            console.warn('audio.play() failed:', err)
+          })
+        }
+      }, 200)
     }
 
     // If we already have some data buffered/ready, try immediately.

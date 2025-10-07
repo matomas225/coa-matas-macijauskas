@@ -1,4 +1,4 @@
-@use "@/styles/variables" as *;
+@use '@/styles/variables' as *;
 
 .album-create-modal {
   position: fixed;
@@ -17,7 +17,9 @@
     height: 24px;
     width: 24px;
     cursor: pointer;
-    transition: color 0.2s, transform 0.2s;
+    transition:
+      color 0.2s,
+      transform 0.2s;
     &:hover {
       color: $accentColorDarker;
       transform: scale(1.1);
@@ -53,6 +55,25 @@
       transition: background 0.2s;
       &:hover {
         background: $accentColorDarker;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .album-create-card {
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 90vw;
+      gap: 0.75rem;
+
+      input {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      button {
+        padding: 0.5rem;
+        font-size: 0.9rem;
       }
     }
   }

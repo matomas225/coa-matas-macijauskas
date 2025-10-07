@@ -29,6 +29,12 @@
       }
     }
 
+    @media (max-width: 480px) {
+      a {
+        padding: 10px 40px 10px 15px;
+      }
+    }
+
     svg {
       padding-right: 5px;
     }
