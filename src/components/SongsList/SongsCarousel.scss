@@ -2,15 +2,16 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+  margin: 0; // No margin, carousel within parent padding
 }
 
 .songs-carousel {
   display: flex;
-  gap: 16px;
+  gap: 1.5rem; // Increased gap between cards
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
-  padding: 10px 0;
+  width: 100%;
+  padding: 1rem 0 1rem 0; // Vertical padding only
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 
@@ -36,8 +37,6 @@
   }
 
   &.scrolling {
-    scroll-behavior: smooth;
-
     .carousel-item {
       transition: transform 0.3s ease;
     }
@@ -51,12 +50,18 @@
     }
   }
 
-  .carousel-item {
-    flex: 0 0 auto;
-    min-width: 175px;
-    max-width: 175px;
-    transition: transform 0.2s ease;
-    cursor: pointer;
+      .carousel-item {
+        flex: 0 0 auto;
+                        min-width: 175px;
+                        max-width: 175px;
+                        margin-right: 0.75rem; // Adjusted spacing between cards
+                        transition: transform 0.2s ease;
+                    
+                        &:last-child {
+                          margin-right: 2rem; // Extra space for the last card
+                        }                      &:last-child {
+                      }              &:last-child {
+              }    cursor: pointer;
 
     &:hover {
       transform: translateY(-2px);
@@ -65,8 +70,8 @@
     .card-wrapper {
       width: 100%;
       height: auto;
-      padding: 10px;
-      border-radius: 6px;
+      padding: 0.75rem; // Reduced padding to allow more content
+      border-radius: 12px; // Match the modern border radius
       cursor: pointer;
 
       .image-wrapper {
@@ -125,6 +130,9 @@
       min-width: 160px;
       max-width: 160px;
 
+      &:last-child {
+        margin-right: 1.5rem; // Extra space for the last card on tablet
+      }
       .card-wrapper {
         .image-wrapper {
           height: 160px;
@@ -143,8 +151,11 @@
       min-width: 140px;
       max-width: 140px;
 
+      &:last-child {
+        margin-right: 1rem; // Extra space for the last card on mobile
+      }
       .card-wrapper {
-        padding: 8px;
+        padding: 0.5rem;
 
         .image-wrapper {
           height: 140px;
@@ -210,25 +221,33 @@
   }
 }
 
-/* Mobile touch optimizations */
-@media (max-width: 768px) {
-  .songs-carousel {
-    gap: 12px;
-    padding: 8px 0;
+  /* Mobile touch optimizations */
+  @media (max-width: 768px) {
+    .songs-carousel {
+      gap: 1rem; // Gap for tablet
+      padding: 0.75rem 0 0.75rem 0;
 
-    .carousel-item {
-      min-width: 160px;
+      .carousel-item {
+        min-width: 160px;
+        max-width: 160px;
+
+        &:last-child {
+        }
+      }
     }
   }
-}
 
-@media (max-width: 480px) {
-  .songs-carousel {
-    gap: 10px;
-    padding: 6px 0;
+  @media (max-width: 480px) {
+    .songs-carousel {
+      gap: 0.875rem; // Gap for mobile
+      padding: 0.5rem 0 0.5rem 0; // Vertical padding only
 
-    .carousel-item {
-      min-width: 140px;
+      .carousel-item {
+        min-width: 140px;
+        max-width: 140px;
+
+        &:last-child {
+        }
+      }
     }
   }
-}

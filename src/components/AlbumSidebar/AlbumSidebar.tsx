@@ -9,7 +9,6 @@ import {
 import {
   getIsSongPlaying,
   getSongId,
-  getSongsList,
   setIsSongPlaying,
   setSongId,
 } from '@/components/SongsList/songSlice'
@@ -29,7 +28,6 @@ export const AlbumSidebar: React.FC = () => {
   const album = useAppSelector(getCurrentAlbum)
   const isPlaying = useAppSelector(getIsSongPlaying)
   const currentSongId = useAppSelector(getSongId)
-  const songsList = useAppSelector(getSongsList)
 
   // Build a playable stream URL from a stored path/filename (basename)
   const toStreamUrl = (pathOrFilename?: string) => {
@@ -82,38 +80,6 @@ export const AlbumSidebar: React.FC = () => {
       dispatch(setIsSongPlaying())
       return
     }
-
-    // Ensure songsList contains a valid stream URL for this song
-    // IMPORTANT: prefer filePath (from server), then fallbacks
-    const fileLike =
-      song.songPath || song.filePath || song.fileName || song.filename
-    const ensuredUrl =
-      typeof fileLike === 'string' && fileLike.startsWith('http')
-        ? fileLike
-        : toStreamUrl(fileLike)
-
-    const list = songsList ?? []
-    let exists = false
-    const updated = list.map((s: any) => {
-      if (s.id === song._id) {
-        exists = true
-        return { ...s, songPath: ensuredUrl }
-      }
-      return s
-    })
-
-    const nextList = exists
-      ? updated
-      : [
-          ...list,
-          {
-            id: song._id,
-            songPath: ensuredUrl,
-            imagePath: song.imagePath,
-            title: song.title,
-            artist: song.artist,
-          },
-        ]
 
     dispatch(setSongId(song._id))
     dispatch(setIsSongPlaying(true))

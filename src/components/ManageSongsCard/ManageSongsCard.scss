@@ -1,80 +1,112 @@
+@use '@/styles/variables' as *;
+
 .manage-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(20px);
 }
 
 .manage-songs-card {
   position: relative;
-  max-width: 800px;
+  max-width: 900px;
   width: 90%;
   margin: 2rem auto;
-  padding: 2rem;
-  background: $bgDark;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  border: 1px solid $bgLightGrey;
+  padding: 3rem;
+  background: rgba($bgGrey, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(white, 0.1);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba($accentColor, 0.1);
   max-height: 85vh;
   overflow-y: auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      $accentColor,
+      adjust-color($accentColor, $lightness: 20%)
+    );
+    border-radius: 20px 20px 0 0;
+  }
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
 
     h1 {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 2rem;
+      font-family: 'circular-bold';
+      font-weight: 700;
       color: $textPrimary;
-      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
 
     .close-button {
-      background: none;
+      background: rgba(white, 0.05);
       border: none;
       font-size: 1.5rem;
       color: $textGrey;
       cursor: pointer;
-      padding: 0.5rem;
-      transition: color 0.2s ease;
+      padding: 0.75rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
 
       &:hover {
-        color: $textPrimary;
+        color: $errorColor;
+        background: rgba($errorColor, 0.1);
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba($errorColor, 0.3);
       }
     }
   }
 
   .songs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
     padding: 0.5rem;
     margin: -0.5rem;
 
     .song-card {
-      background: $bgGrey;
-      border-radius: 8px;
-      padding: 0.75rem;
-      transition: all 0.2s ease;
+      background: rgba($bgDark, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(white, 0.05);
+      border-radius: 16px;
+      padding: 1rem;
+      transition: all 0.3s ease;
       cursor: pointer;
       transform: scale(1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 
       &:hover {
-        background: $bgLightGrey;
-        transform: scale(1.02);
+        background: rgba($bgDark, 0.9);
+        transform: translateY(-4px) scale(1.02);
+        box-shadow:
+          0 12px 30px rgba(0, 0, 0, 0.3),
+          0 0 20px rgba($accentColor, 0.2);
+        border-color: rgba($accentColor, 0.3);
 
         .actions {
-          opacity: 1; // Always show buttons on tablet/mobile
           opacity: 1;
         }
       }
@@ -83,10 +115,10 @@
         position: relative;
         width: 100%;
         padding-bottom: 100%;
-        margin-bottom: 0.75rem;
-        border-radius: 6px;
+        margin-bottom: 1rem;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 
         img {
           padding: 0;
@@ -101,10 +133,11 @@
 
       .song-info {
         h3 {
-          margin: 0 0 0.25rem 0;
+          margin: 0 0 0.5rem 0;
           color: $textPrimary;
-          font-size: 0.875rem;
-          font-weight: 500;
+          font-size: 1rem;
+          font-family: 'circular-medium';
+          font-weight: 600;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -113,7 +146,8 @@
         p {
           margin: 0;
           color: $textGrey;
-          font-size: 0.75rem;
+          font-size: 0.85rem;
+          font-family: 'circular-medium';
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -122,35 +156,43 @@
 
       .actions {
         display: flex;
-        gap: 0.5rem;
-        margin-top: 0.75rem;
+        gap: 0.75rem;
+        margin-top: 1rem;
         opacity: 0;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.3s ease;
 
         button {
           flex: 1;
-          padding: 0.4rem;
+          padding: 0.6rem 0.8rem;
           border: none;
-          border-radius: 4px;
+          border-radius: 25px;
           cursor: pointer;
-          font-size: 0.75rem;
-          transition: all 0.2s ease;
+          font-size: 0.8rem;
+          font-family: 'circular-bold';
+          font-weight: 600;
+          transition: all 0.3s ease;
 
           &.edit {
-            background: $bgLightGrey;
+            background: $accentColor;
             color: $textPrimary;
+            box-shadow: 0 4px 15px rgba($accentColor, 0.3);
 
             &:hover {
-              background: $accentColor;
+              background: adjust-color($accentColor, $lightness: 10%);
+              transform: translateY(-2px);
+              box-shadow: 0 6px 20px rgba($accentColor, 0.4);
             }
           }
 
           &.delete {
             background: $errorColor;
-            color: $textPrimary;
+            color: white;
+            box-shadow: 0 4px 15px rgba($errorColor, 0.3);
 
             &:hover {
-              opacity: 0.8;
+              background: adjust-color($errorColor, $lightness: 10%);
+              transform: translateY(-2px);
+              box-shadow: 0 6px 20px rgba($errorColor, 0.4);
             }
           }
         }
@@ -188,43 +230,102 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .manage-songs-card {
-    width: 95%;
-    margin: 1rem;
-    padding: 1.5rem;
-    max-height: 90vh;
+    max-width: 800px;
+    padding: 2.5rem;
+
+    .songs-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.25rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .manage-popup-overlay {
+    padding: 0;
+  }
+
+  .manage-songs-card {
+    width: 90%; // Set width to 90%
+    /* height: 100vh; */ // Removed height
+    margin: 2rem auto; // Center the modal
+    padding: 2rem;
+    border-radius: 20px; // Apply border-radius
+    max-height: 85vh; // Limit height to 85% of viewport height
+    max-width: none;
+    overflow-y: auto; // Enable vertical scrolling if content overflows
 
     .header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+
       h1 {
-        font-size: 1.25rem;
+        font-size: 1.75rem;
+      }
+
+      .close-button {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 1.75rem;
+        padding: 0.5rem;
       }
     }
 
     .songs-grid {
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.75rem;
+      grid-template-columns: repeat(2, 1fr); // Two-column layout for mobile
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
     }
 
     .song-card {
-      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center; // Center content horizontally
+      padding: 0.75rem;
+
+      .image-wrapper {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0;
+
+        img {
+          border-radius: 8px;
+        }
+      }
 
       .song-info {
+        text-align: center; // Center text
+        margin-bottom: 0.5rem;
         h3 {
-          font-size: 0.8rem;
+          font-size: 0.9rem;
+          white-space: normal;
+          overflow: visible;
+          text-overflow: clip;
         }
-
         p {
-          font-size: 0.7rem;
+          font-size: 0.8rem;
+          white-space: normal;
+          overflow: visible;
+          text-overflow: clip;
         }
       }
 
       .actions {
-        opacity: 1; // Always show buttons on mobile/tablet
+        opacity: 1; // Always show buttons
+        display: flex;
+        flex-direction: column; // Vertically aligned buttons
+        gap: 0.4rem;
+        width: 100%; // Make buttons fill width
 
         button {
-          font-size: 0.7rem;
-          padding: 0.3rem;
+          flex: 1;
+          padding: 0.5rem 0.6rem;
+          font-size: 0.75rem;
         }
       }
     }
@@ -235,37 +336,115 @@
   .manage-songs-card {
     width: 98%;
     margin: 0.5rem;
-    padding: 1rem;
+    padding: 1.5rem;
+
+    .header {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .close-button {
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+      }
+    }
 
     .songs-grid {
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 0.5rem;
+      grid-template-columns: 1fr; // Single column layout for very small mobile
+      gap: 0.75rem;
     }
 
     .song-card {
-      padding: 0.4rem;
+      // Reset all desktop flex styles
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      padding: 0.75rem !important;
+      position: relative !important;
 
       .image-wrapper {
-        margin-bottom: 0.5rem;
+        // Reset desktop positioning and sizing
+        position: static !important;
+        width: auto !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+        border-radius: 0 !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+
+        // Apply mobile inline layout - slightly bigger
+        flex: 0 0 50px !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin-right: 0.75rem !important;
+
+        img {
+          // Reset desktop absolute positioning
+          position: static !important;
+          top: auto !important;
+          left: auto !important;
+          padding: 0 !important;
+
+          // Apply mobile sizing
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          border-radius: 6px !important;
+        }
       }
 
       .song-info {
-        h3 {
-          font-size: 0.75rem;
-        }
+        // Take remaining space but ensure minimum width
+        flex: 1 1 120px !important; // min 120px, grow to fill, shrink if needed
+        min-width: 120px !important;
+        margin-right: 1rem !important; // More space before buttons
+        overflow: hidden !important;
+        text-align: left !important; // Left-align text
 
+        h3 {
+          font-size: 0.8rem !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          margin: 0 0 0.2rem 0 !important;
+          color: inherit !important; // Ensure text color is visible
+          text-align: left !important; // Left-align title
+        }
         p {
-          font-size: 0.65rem;
+          font-size: 0.7rem !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
+          margin: 0 !important;
+          color: inherit !important; // Ensure text color is visible
+          text-align: left !important; // Left-align artist
         }
       }
 
       .actions {
-        margin-top: 0.5rem;
-        opacity: 1; // Always show buttons on mobile
+        // Reset desktop opacity and positioning
+        opacity: 1 !important;
+        margin-top: 0 !important;
+        display: flex !important;
+        gap: 0.25rem !important;
+
+        // Position buttons on far right
+        flex: 1 !important; // Take remaining space
+        justify-content: flex-end !important; // Push buttons to right
+        flex-direction: column !important;
 
         button {
-          font-size: 0.65rem;
-          padding: 0.25rem;
+          // Reset desktop button styles
+          flex: none !important;
+          padding: 0 !important;
+          border-radius: 50% !important;
+          font-size: 0.6rem !important;
+          width: 28px !important;
+          height: 28px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
         }
       }
     }

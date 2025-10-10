@@ -34,14 +34,30 @@
   border-radius: 3px;
 }
 
-.audio-player {
+.full-layout,
+.bar-layout {
   position: fixed;
   bottom: 0;
   background-color: $black;
   width: 100%;
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
+}
+
+.bar-layout {
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: $accentColor;
+    z-index: 1;
+  }
+}
+
+.full-layout,
+.bar-layout {
   img {
     width: 70px;
     height: 70px;
@@ -67,12 +83,20 @@
         font-size: 14px;
         color: $textPrimary;
         font-family: 'circular-light';
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 200px;
       }
       .song-artist {
         margin: 0;
         font-size: 12px;
         color: $textGrey;
         font-family: 'circular-light';
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 200px;
       }
     }
   }
@@ -128,9 +152,7 @@
         margin: 5px 0;
         padding: 0;
         color: $textGrey;
-        white-space: nowrap;
-        display: inline-block;
-        min-width: 32px;
+        text-align: center; // Center the text within the fixed width
       }
 
       .audio-slider {
@@ -251,6 +273,317 @@
 
       &:focus::-moz-range-thumb {
         @include on-thumb-hover;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .bar-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 80px;
+    .song-info {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      img {
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        cursor: pointer;
+      }
+      div {
+        flex: 1;
+        .song-title {
+          font-size: 14px;
+          max-width: none;
+          overflow: visible;
+          white-space: normal;
+        }
+        .song-artist {
+          font-size: 12px;
+          max-width: none;
+          overflow: visible;
+          white-space: normal;
+        }
+      }
+    }
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      .play-pause-button {
+        width: 32px;
+        height: 32px;
+        margin: 0 10px;
+        color: $iconWhite;
+        cursor: pointer;
+      }
+      .next-button {
+        width: 20px;
+        height: 20px;
+        margin: 0 10px;
+        color: $iconGrey;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.audio-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .modal-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      margin: 40px 0 20px;
+    }
+    .modal-info {
+      text-align: center;
+      margin-bottom: 20px;
+      .modal-title {
+        font-size: 24px;
+        color: white;
+        margin: 0;
+      }
+      .modal-artist {
+        font-size: 18px;
+        color: $textGrey;
+        margin: 0;
+      }
+    }
+    .modal-slider {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 500px; // Further increased max-width
+      margin-bottom: 20px;
+      p {
+        color: white;
+        margin: 0; // Removed horizontal margin
+        font-size: 14px;
+        width: 70px; // Further lowered width for modal numbers
+        text-align: center; // Center the text within the fixed width
+      }
+      .modal-audio-slider {
+        flex: 1;
+        width: 400px;
+        height: 6px;
+        -webkit-appearance: none;
+        background: linear-gradient(
+          to right,
+          $accentColorDarker 0%,
+          $accentColorDarker var(--progress, 0%),
+          $bgGrey var(--progress, 0%),
+          $bgGrey 100%
+        );
+        outline: none;
+        border-radius: 3px;
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 14px;
+          width: 16px;
+          background: $accentColor;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+      }
+    }
+    .modal-controls {
+      display: flex;
+      align-items: center;
+      .modal-prev,
+      .modal-next {
+        width: 40px;
+        height: 40px;
+        color: white;
+        cursor: pointer;
+        margin: 0 20px;
+      }
+      .modal-play {
+        width: 60px;
+        height: 60px;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) {
+  .full-layout {
+    display: flex;
+    justify-content: space-between;
+    .song-info,
+    .audio-controls,
+    .song-time {
+      flex: 1;
+    }
+    .audio-controls {
+      .wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .previous-button {
+          width: 16px;
+          height: 16px;
+          cursor: pointer;
+          color: $iconGrey;
+          transition-duration: 0.2s;
+          &:hover {
+            color: $iconWhite;
+            transform: scale(1.05);
+          }
+        }
+      }
+      .slider {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0px;
+        padding: 0px;
+        p {
+          margin: 5px 0;
+          padding: 0;
+          color: $textGrey;
+          white-space: nowrap;
+          display: inline-block;
+          min-width: 32px;
+        }
+        .audio-slider {
+          -webkit-appearance: none;
+          width: 100%;
+          outline: none;
+          accent-color: $accentColor;
+          margin: 0 5px;
+          @include track-style;
+          &::-webkit-slider-runnable-track {
+            @include track-style;
+          }
+          &::-moz-range-track {
+            @include track-style;
+          }
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            margin-top: -4px;
+            @include thumb-style;
+          }
+          &:hover::-webkit-slider-thumb {
+            @include on-thumb-hover;
+          }
+          &:focus::-webkit-slider-thumb {
+            @include on-thumb-hover;
+          }
+          &::-moz-range-thumb {
+            @include thumb-style;
+          }
+          &:hover::-moz-range-thumb {
+            @include on-thumb-hover;
+          }
+          &:focus::-moz-range-thumb {
+            @include on-thumb-hover;
+          }
+        }
+      }
+    }
+    .song-time {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      padding: 10px;
+      .volume-icon {
+        color: $iconGrey;
+      }
+      .volume-slider {
+        -webkit-appearance: none;
+        height: 6px;
+        background: linear-gradient(
+          to right,
+          $accentColorDarker 0%,
+          $accentColorDarker var(--volume, 100%),
+          $bgGrey var(--volume, 0%),
+          $bgGrey 100%
+        );
+        border-radius: 3px;
+        outline: none;
+        margin-left: 10px;
+        accent-color: $accentColorDarker;
+        cursor: pointer;
+        &::-webkit-slider-runnable-track {
+          background: linear-gradient(
+            to right,
+            $accentColorDarker 0%,
+            $accentColorDarker var(--volume, 100%),
+            $bgGrey var(--volume, 0%),
+            $bgGrey 100%
+          );
+          height: 6px;
+          border-radius: 3px;
+        }
+        &::-moz-range-track {
+          background: linear-gradient(
+            to right,
+            $accentColorDarker 0%,
+            $accentColorDarker var(--volume, 100%),
+            $bgGrey var(--volume, 0%),
+            $bgGrey 100%
+          );
+          height: 6px;
+          border-radius: 3px;
+        }
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          margin-top: -4px;
+          @include thumb-style;
+        }
+        &:hover::-webkit-slider-thumb {
+          @include on-thumb-hover;
+        }
+        &:focus::-webkit-slider-thumb {
+          @include on-thumb-hover;
+        }
+        &::-moz-range-thumb {
+          @include thumb-style;
+        }
+        &:hover::-moz-range-thumb {
+          @include on-thumb-hover;
+        }
+        &:focus::-moz-range-thumb {
+          @include on-thumb-hover;
+        }
       }
     }
   }

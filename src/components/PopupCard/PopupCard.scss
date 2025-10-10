@@ -1,101 +1,158 @@
+@use '@/styles/variables' as *;
+
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(10, 10, 20, 0.85); // darker overlay
+  background: rgba(0, 0, 0, 0.7);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(20px);
 }
 
 .popup-card {
-  background: $bgGrey; // use your dark background variable
-  border-radius: 16px;
-  padding: 35px;
-  min-width: 320px;
+  background: rgba($bgGrey, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(white, 0.1);
+  border-radius: 20px;
+  padding: 3rem;
+  min-width: 400px;
   max-width: 90vw;
   position: relative;
   text-align: center;
-  color: $textPrimary; // light text
+  color: $textPrimary;
   font-family: 'circular-medium';
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba($accentColor, 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      $accentColor,
+      adjust-color($accentColor, $lightness: 20%)
+    );
+    border-radius: 20px 20px 0 0;
+  }
 }
 
 .popup-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  color: $accentColor;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: $textGrey;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: rgba(white, 0.05);
+
   &:hover {
-    color: $accentColorDarker;
+    color: $errorColor;
+    background: rgba($errorColor, 0.1);
     transform: scale(1.1);
+    box-shadow: 0 0 15px rgba($errorColor, 0.3);
   }
 }
 
 .popup-text {
   color: $textPrimary;
-  font-size: 28px;
+  font-size: 2rem;
+  font-family: 'circular-bold';
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .popup-subtext {
   color: $textGrey;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
 
 .popup-buttons {
-  margin-top: 30px;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 1rem;
 }
 
-.popup-login {
+.popup-login,
+.popup-register {
   text-decoration: none;
-  padding: 10px 60px;
-  font-size: 18px;
-  border-radius: 6px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 25px;
   border: none;
   background: $accentColor;
   color: $textPrimary;
   cursor: pointer;
-  transition: 0.1s;
+  transition: all 0.3s ease;
+  font-family: 'circular-bold';
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba($accentColor, 0.3);
+
   &:hover {
-    background: $accentColorDarker;
+    background: adjust-color($accentColor, $lightness: 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($accentColor, 0.4);
   }
 }
 
-.popup-register {
-  text-decoration: none;
-  padding: 10px 60px;
-  font-size: 18px;
-  border-radius: 6px;
-  border: none;
-  background: $accentColor;
-  color: $textPrimary;
-  cursor: pointer;
-  transition: 0.1s;
-  &:hover {
-    background: $accentColorDarker;
+@media (max-width: 768px) {
+  .popup-card {
+    padding: 2.5rem;
+    min-width: 350px;
+  }
+
+  .popup-text {
+    font-size: 1.75rem;
+  }
+
+  .popup-subtext {
+    font-size: 1rem;
+  }
+
+  .popup-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .popup-login,
+  .popup-register {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .popup-card {
-    padding: 20px;
-    min-width: 280px;
+    padding: 2rem;
+    min-width: 300px;
   }
 
   .popup-text {
-    font-size: 24px;
+    font-size: 1.5rem;
+  }
+
+  .popup-subtext {
+    font-size: 0.95rem;
   }
 
   .popup-login,
   .popup-register {
-    padding: 10px 40px;
-    font-size: 16px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
   }
 }

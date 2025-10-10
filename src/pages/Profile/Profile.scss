@@ -1,6 +1,6 @@
 @use '@/styles/variables' as *;
 
-.home-page {
+.profile-page {
   min-height: 100vh;
   background: linear-gradient(
     135deg,
@@ -11,9 +11,9 @@
 }
 
 // Hero Section
-.home-hero {
+.profile-hero {
   position: relative;
-  height: 400px;
+  height: 300px;
   overflow: hidden;
   margin-bottom: 2rem;
 
@@ -45,7 +45,7 @@
 
     h1 {
       margin: 0 0 1rem 0;
-      font-size: 3.5rem;
+      font-size: 3rem;
       font-family: 'circular-bold';
       font-weight: 700;
       color: white;
@@ -65,20 +65,20 @@
 }
 
 // Main Content
-.home-content {
+.profile-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 0 4rem 0;
+  padding: 0 2rem 4rem 2rem;
 }
 
 // Responsive Design
 @media (max-width: 1024px) {
-  .home-hero {
-    height: 350px;
+  .profile-hero {
+    height: 250px;
 
     .hero-content {
       h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
       }
 
       p {
@@ -87,20 +87,20 @@
     }
   }
 
-  .home-content {
-    padding: 0 0 3rem 0;
+  .profile-content {
+    padding: 0 1.5rem 3rem 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .home-hero {
-    height: 300px;
+  .profile-hero {
+    height: 200px;
 
     .hero-content {
       padding: 0 1rem;
 
       h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
 
       p {
@@ -109,18 +109,18 @@
     }
   }
 
-  .home-content {
-    padding: 0 0 0 0; // Remove padding-bottom for mobile
+  .profile-content {
+    padding: 0 1rem 2rem 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .home-hero {
-    height: 250px;
+  .profile-hero {
+    height: 180px;
 
     .hero-content {
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
 
       p {

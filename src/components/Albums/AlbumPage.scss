@@ -1,196 +1,504 @@
-@use "@/styles/variables" as *;
+@use '@/styles/variables' as *;
 
 .album-page {
   min-height: 100vh;
-  background: $bgDark;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0;
-}
-
-.album-header {
-  font-size: 20px;
-}
-
-.album-info {
-  margin: 3rem auto 2rem auto;
-  background: $bgGrey;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  padding: 2.5rem 3rem 2rem 3rem;
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
-}
-
-.album-info-header {
-  display: flex;
-}
-
-.album-cover {
-  padding: 0;
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-  margin-bottom: 1.5rem;
-}
-
-.album-details {
-  padding-left: 2rem;
-  display: flex;
-  gap: 12px;
-  flex-direction: column;
+  background: linear-gradient(
+    135deg,
+    $bgDark 0%,
+    adjust-color($bgDark, $lightness: 5%) 100%
+  );
   color: $textPrimary;
-
-  h2 {
-    margin: 0 0 0.5rem 0;
-    color: $accentColor;
-    font-size: 2.1rem;
-    font-family: "circular-bold";
-    letter-spacing: 0.5px;
-  }
-
-  p {
-    margin: 0;
-    color: $textGrey;
-    font-size: 1.3rem;
-    font-family: "circular-medium";
-  }
 }
 
-.album-songs {
-  margin-top: 20px;
-  display: flex;
-  font-size: 2rem;
-  flex-direction: column;
-}
+// Hero Section
+.album-hero {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  margin-bottom: 2rem;
 
-.album-song-item {
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  border: 1px solid $borderGrey;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  padding-right: 12px; // room for action button
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-  img {
-    padding: 0;
-    margin: 16px;
-    width: 72px;
-    height: 72px;
-    border-radius: 8px;
+    .hero-bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(20px) brightness(0.3);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba($bgDark, 0.8) 0%,
+        rgba($bgDark, 0.6) 50%,
+        rgba($bgDark, 0.8) 100%
+      );
+    }
   }
 
-  // Details block
-  > div:nth-of-type(1) {
+  .hero-content {
+    position: relative;
+    z-index: 2;
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem 2rem; // Bottom padding to ensure button fits
 
-  p {
-    padding: 0;
-    margin: 0;
-    color: $textPrimary;
-  }
-}
+    .album-cover-large {
+      flex-shrink: 0;
+      width: 250px;
+      height: 250px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 
-.album-song-actions {
-  margin-left: auto; // push actions to the right
-  display: flex;
-  align-items: center;
-}
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
 
-.trash-icon {
-  margin-right: 8px;
-}
+    .album-details {
+      flex: 1;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-// Remove button base + red destructive variant
-.remove-song-btn {
-  background: $accentColor;
-  color: $textPrimary;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1.1rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-  margin-left: 1.2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+      h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 3rem;
+        font-family: 'circular-bold';
+        font-weight: 700;
+        line-height: 1.1;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
 
-  &:hover {
-    background: $accentColorDarker;
-  }
+      .album-artist {
+        margin: 0 0 1rem 0;
+        font-size: 1.5rem;
+        font-family: 'circular-medium';
+        color: rgba(white, 0.8);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        text-align: center;
+      }
 
-  &:active {
-    transform: scale(0.98);
-  }
+      .album-stats {
+        margin-bottom: 2rem;
+        align-self: center;
 
-  &.danger {
-    background: $errorColor;
+        span {
+          display: inline-block;
+          background: rgba(white, 0.1);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-family: 'circular-medium';
+          backdrop-filter: blur(10px);
+          white-space: nowrap;
+          max-width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
 
-    &:hover {
-      background: $errorColorDarker;
+      .add-song-btn.hero-btn {
+        background: $accentColor;
+        color: $textPrimary;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        font-family: 'circular-bold';
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow:
+          0 4px 15px rgba($accentColor, 0.3),
+          0 0 30px rgba($accentColor, 0.2),
+          0 0 60px rgba($accentColor, 0.1);
+        align-self: center;
+
+        &:hover {
+          background: adjust-color($accentColor, $lightness: 10%);
+          transform: translateY(-2px);
+          box-shadow:
+            0 6px 20px rgba($accentColor, 0.4),
+            0 0 40px rgba($accentColor, 0.3),
+            0 0 80px rgba($accentColor, 0.2);
+        }
+      }
     }
   }
 }
 
-.add-song-btn {
-  background: $accentColor;
-  color: $textPrimary;
-  border: none;
-  border-radius: 6px;
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-top: 1.2rem;
+// Main Content
+.album-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem 2rem;
+}
+
+.songs-section {
+  .section-header {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 2rem;
+      font-family: 'circular-bold';
+      color: $textPrimary;
+      margin: 0;
+    }
+
+    .add-song-btn {
+      display: none; // Hide songs section button on desktop
+      background: $accentColor;
+      color: $textPrimary;
+      border: none;
+      border-radius: 25px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'circular-bold';
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba($accentColor, 0.3);
+
+      &:hover {
+        background: adjust-color($accentColor, $lightness: 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($accentColor, 0.4);
+      }
+    }
+  }
+}
+
+.songs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.song-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: $bgGrey;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 
   &:hover {
-    background: $accentColorDarker;
-  }
-}
-
-.no-songs {
-  color: $textGrey;
-  font-size: 1.1rem;
-  text-align: center;
-  margin: 1.5rem 0;
-}
-
-@media (max-width: 700px) {
-  .album-info {
-    min-width: 0;
-    max-width: 98vw;
-    padding: 1.2rem 0.5rem;
+    background: adjust-color($bgGrey, $lightness: 3%);
+    border-color: $accentColor;
+    transform: translateX(4px);
   }
 
-  .album-cover {
-    width: 120px;
-    height: 120px;
+  .song-number {
+    width: 40px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $textGrey;
+    font-family: 'circular-bold';
   }
 
-  .album-song-item {
-    padding-right: 8px;
+  .song-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
     img {
-      margin: 12px;
-      width: 60px;
-      height: 60px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
-  .remove-song-btn {
-    padding: 0.45rem 0.9rem;
-    font-size: 0.95rem;
+  .song-info {
+    flex: 1;
+
+    h3 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1.1rem;
+      font-family: 'circular-medium';
+      color: $textPrimary;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: $textGrey;
+    }
+  }
+
+  .song-actions {
+    .remove-song-btn {
+      background: none;
+      border: none;
+      color: $textGrey;
+      padding: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: $errorColor;
+        color: white;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $bgGrey;
+  border-radius: 16px;
+  margin-top: 2rem;
+
+  .empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: $textPrimary;
+    font-family: 'circular-bold';
+  }
+
+  p {
+    margin: 0 0 2rem 0;
+    color: $textGrey;
+    font-size: 1rem;
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .album-hero {
+    height: 450px;
+
+    .hero-content {
+      padding: 0 1.5rem;
+
+      .album-cover-large {
+        width: 200px;
+        height: 200px;
+      }
+
+      .album-details {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .album-artist {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+
+  .album-content {
+    padding: 0 1.5rem 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .album-hero {
+    height: 400px;
+
+    .hero-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem 4rem 1rem; // Increased bottom padding for mobile button
+
+      .album-cover-large {
+        width: 180px;
+        height: 180px;
+        align-self: center;
+      }
+
+      .album-details {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .album-artist {
+          font-size: 1.2rem;
+        }
+
+        .album-stats {
+          margin-bottom: 1.5rem;
+        }
+
+        .add-song-btn.hero-btn {
+          display: none; // Hide hero button on mobile
+        }
+
+        .add-song-btn {
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+        }
+
+        .album-stats {
+          margin-bottom: 1.5rem;
+        }
+
+        .add-song-btn.hero-btn {
+          display: none; // Hide hero button on tablet
+        }
+
+        .add-song-btn {
+          padding: 0.8rem 1.5rem;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .album-content {
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .songs-section {
+    .section-header {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .add-song-btn {
+        display: flex; // Show songs section button on tablet
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .song-card {
+    padding: 0.75rem;
+
+    .song-number {
+      width: 30px;
+      font-size: 1rem;
+    }
+
+    .song-image {
+      width: 50px;
+      height: 50px;
+      margin-right: 0.75rem;
+    }
+
+    .song-info {
+      h3 {
+        font-size: 1rem;
+      }
+
+      p {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .album-hero {
+    height: 350px;
+
+    .hero-content {
+      padding: 1.5rem 1rem 3rem 1rem; // Adjusted padding for small mobile
+
+      .album-cover-large {
+        width: 150px;
+        height: 150px;
+        align-self: center;
+      }
+
+      .album-details {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .album-artist {
+          font-size: 1.1rem;
+        }
+
+        .add-song-btn {
+          padding: 0.75rem 1.25rem;
+          font-size: 0.95rem;
+        }
+      }
+    }
+  }
+
+  .song-card {
+    .song-number {
+      display: none;
+    }
+
+    .song-info {
+      h3 {
+        font-size: 0.95rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .songs-section {
+    .section-header {
+      .add-song-btn {
+        display: flex; // Show songs section button on mobile
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .empty-state {
+    padding: 3rem 1rem;
+
+    .empty-icon {
+      font-size: 3rem;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
   }
 }

@@ -93,56 +93,48 @@ export const AddSongToAlbumModal: React.FC<AddSongToAlbumModalProps> = ({
   return (
     <div className="add-song-modal-overlay">
       <div className="add-song-modal">
-        <h2>Add Song to Album</h2>
-        <div>
+        <div className="modal-header">
+          <h2>Add Song to Album</h2>
           <Button type="button" onClick={onClose} className="close-modal">
-            Close
+            ×
           </Button>
         </div>
 
-        <table className="songs-table">
-          <thead>
-            <tr>
-              <th>Cover</th>
-              <th>Title</th>
-              <th>Artist</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allSongs?.length ? (
-              allSongs.map((song) => {
-                const isInAlbum = albumSongIds.has(song.id)
-                return (
-                  <tr key={song.id}>
-                    <td>
-                      <img src={song.imagePath} alt={song.title} width={40} />
-                    </td>
-                    <td>{song.title}</td>
-                    <td>{song.artist}</td>
-                    <td>
-                      {!isInAlbum ? (
-                        <Button
-                          type="button"
-                          onClick={() => handleAddSong(song.id)}
-                          className="add-to-album"
-                        >
-                          Add
-                        </Button>
-                      ) : (
-                        <p>Song is already added</p>
-                      )}
-                    </td>
-                  </tr>
-                )
-              })
-            ) : (
-              <tr>
-                <td colSpan={4}>No songs found.</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <div className="songs-grid">
+          {allSongs?.length ? (
+            allSongs.map((song) => {
+              const isInAlbum = albumSongIds.has(song.id)
+              return (
+                <div key={song.id} className="song-card">
+                  <div className="song-image">
+                    <img src={song.imagePath} alt={song.title} />
+                  </div>
+                  <div className="song-info">
+                    <h3>{song.title}</h3>
+                    <p>{song.artist}</p>
+                  </div>
+                  <div className="song-action">
+                    {!isInAlbum ? (
+                      <Button
+                        type="button"
+                        onClick={() => handleAddSong(song.id)}
+                        className="add-to-album"
+                      >
+                        Add to Album
+                      </Button>
+                    ) : (
+                      <span className="already-added">Already Added</span>
+                    )}
+                  </div>
+                </div>
+              )
+            })
+          ) : (
+            <div className="no-songs">
+              <p>No songs found.</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

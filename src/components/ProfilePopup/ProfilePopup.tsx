@@ -1,65 +1,56 @@
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
-import "./ProfilePopup.scss";
-import { closeProfilePopup, getProfilePopupState } from "./profilePopupSlice";
-import React from "react";
-import useOnClickOutside from "@/hooks/useOnClickOutside";
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
+import './ProfilePopup.scss'
+import { closeProfilePopup, getProfilePopupState } from './profilePopupSlice'
+import React from 'react'
+import useOnClickOutside from '@/hooks/useOnClickOutside'
 import {
-  faGear,
   faUser,
   faArrowRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
-import { PopupListItem } from "./PopupListItem";
-import { logoutUser } from "@/components/Login/sessionSlice";
-import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
-import { resetSongState } from "../SongsList/songSlice";
-import { routes } from "@/utils/routes";
+} from '@fortawesome/free-solid-svg-icons'
+import { PopupListItem } from './PopupListItem'
+import { logoutUser } from '@/components/Login/sessionSlice'
+import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
+import { resetSongState } from '../SongsList/songSlice'
+import { routes } from '@/utils/routes'
 
 type ProfilePopupProps = {
-  ignoreRef?: React.RefObject<HTMLLIElement | null>;
-};
+  ignoreRef?: React.RefObject<HTMLLIElement | null>
+}
 
 export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
-  const displayPopup = useAppSelector(getProfilePopupState);
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const displayPopup = useAppSelector(getProfilePopupState)
+  const dispatch = useAppDispatch()
+  const { t } = useTranslation()
 
   const ref = useOnClickOutside({
     callback: () => {
-      dispatch(closeProfilePopup());
+      dispatch(closeProfilePopup())
     },
     ignoreRef,
-  });
+  })
 
   const popupList = [
     {
-      name: "Profile",
+      name: 'Profile',
       icon: faUser,
       link: routes.profile,
       onClick: () => {
-        dispatch(closeProfilePopup());
+        dispatch(closeProfilePopup())
       },
     },
     {
-      name: "Settings",
-      icon: faGear,
-      link: "#",
-      onClick: () => {
-        dispatch(closeProfilePopup());
-      },
-    },
-    {
-      name: "Logout",
+      name: 'Logout',
       icon: faArrowRightFromBracket,
       link: routes.home,
       onClick: () => {
-        dispatch(logoutUser());
-        dispatch(closeProfilePopup());
-        dispatch(resetSongState());
-        toast.success(t("login.logedOut"));
+        dispatch(logoutUser())
+        dispatch(closeProfilePopup())
+        dispatch(resetSongState())
+        toast.success(t('login.logedOut'))
       },
     },
-  ];
+  ]
 
   return (
     <>
@@ -75,11 +66,11 @@ export const ProfilePopup: React.FC<ProfilePopupProps> = ({ ignoreRef }) => {
                   onClick={item?.onClick}
                   key={i}
                 />
-              );
+              )
             })}
           </ul>
         </div>
       ) : null}
     </>
-  );
-};
+  )
+}

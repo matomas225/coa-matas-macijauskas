@@ -50,53 +50,86 @@ export const AlbumPage: React.FC = () => {
 
   return (
     <div className="album-page">
-      <span className="album-header">
-        <h1>Album Details</h1>
-      </span>
-      <div className="album-info">
-        <div className="album-info-header">
-          <img
-            src={album.coverImagePath}
-            alt={album.title}
-            className="album-cover"
-          />
+      <div className="album-hero">
+        <div className="hero-background">
+          <img src={album.coverImagePath} alt="" className="hero-bg-image" />
+          <div className="hero-overlay"></div>
+        </div>
+        <div className="hero-content">
+          <div className="album-cover-large">
+            <img src={album.coverImagePath} alt={album.title} />
+          </div>
           <div className="album-details">
-            <h2>Album Title: {album.title}</h2>
-            <p>Artist Name: {album.artist}</p>
-            <Button type="button" onClick={() => setAddSongModalOpen(true)}>
+            <h1>{album.title}</h1>
+            <p className="album-artist">{album.artist}</p>
+            <div className="album-stats">
+              <span>{album.songs?.length || 0} songs</span>
+            </div>
+            <Button
+              type="button"
+              className="add-song-btn hero-btn"
+              onClick={() => setAddSongModalOpen(true)}
+            >
               Add Song
             </Button>
           </div>
         </div>
-        <div className="album-songs">
-          <p>Albums Song List</p>
+      </div>
+
+      <div className="album-content">
+        <div className="songs-section">
+          <div className="section-header">
+            <h2>Songs</h2>
+            <Button
+              type="button"
+              className="add-song-btn"
+              onClick={() => setAddSongModalOpen(true)}
+            >
+              Add Song
+            </Button>
+          </div>
+
           {album.songs && album.songs.length > 0 ? (
-            <div>
-              {album.songs.map((song) => (
-                <div className="album-song-item" key={song._id}>
-                  <img src={song.imagePath} alt={song.title} />
-                  <div>
-                    <p>Title: {song.title}</p>
-                    <p>Artist: {song.artist}</p>
+            <div className="songs-grid">
+              {album.songs.map((song, index) => (
+                <div className="song-card" key={song._id}>
+                  <div className="song-number">{index + 1}</div>
+                  <div className="song-image">
+                    <img src={song.imagePath} alt={song.title} />
                   </div>
-                  <div className="album-song-actions">
+                  <div className="song-info">
+                    <h3>{song.title}</h3>
+                    <p>{song.artist}</p>
+                  </div>
+                  <div className="song-actions">
                     <Button
                       type="button"
-                      className="remove-song-btn danger"
+                      className="remove-song-btn"
                       onClick={() => handleRemoveSong(song._id)}
                     >
-                      <FontAwesomeIcon icon={faTrash} className="trash-icon" />
-                      Remove
+                      <FontAwesomeIcon icon={faTrash} />
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p>No songs in this album.</p>
+            <div className="empty-state">
+              <div className="empty-icon">🎵</div>
+              <h3>No songs yet</h3>
+              <p>Add your first song to this album</p>
+              <Button
+                type="button"
+                className="add-song-btn"
+                onClick={() => setAddSongModalOpen(true)}
+              >
+                Add Song
+              </Button>
+            </div>
           )}
         </div>
       </div>
+
       <AddSongToAlbumModal
         isOpen={isAddSongModalOpen}
         onClose={() => setAddSongModalOpen(false)}

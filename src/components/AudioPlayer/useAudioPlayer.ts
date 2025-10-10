@@ -11,12 +11,14 @@ export const useAudioPlayer = (
   songPath: string,
   isPlaying: boolean,
   currentSongId: string | null,
+  onSongEnd: () => void, // New parameter for auto-play next song
 ) => {
   const token = useAppSelector(getTokenState)
 
   // DOM refs
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const audioSliderRef = useRef<HTMLInputElement | null>(null)
+  const modalAudioSliderRef = useRef<HTMLInputElement | null>(null) // New ref for modal slider
   const volumeSliderRef = useRef<HTMLInputElement | null>(null)
 
   // UI state
@@ -57,6 +59,12 @@ export const useAudioPlayer = (
           `${valuePercentage}%`,
         )
       }
+      if (modalAudioSliderRef.current) {
+        modalAudioSliderRef.current.style.setProperty(
+          '--progress',
+          `${valuePercentage}%`,
+        )
+      }
 
       if (!Number.isNaN(audio.currentTime)) {
         setCurrentTime(audio.currentTime)
@@ -81,14 +89,20 @@ export const useAudioPlayer = (
       })
     }
 
+    const handleEnded = () => {
+      onSongEnd()
+    }
+
     audio.addEventListener('timeupdate', handleTimeUpdate)
     audio.addEventListener('loadedmetadata', handleLoadedMetadata)
     audio.addEventListener('error', handleError)
+    audio.addEventListener('ended', handleEnded)
 
     return () => {
       audio.removeEventListener('timeupdate', handleTimeUpdate)
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata)
       audio.removeEventListener('error', handleError)
+      audio.removeEventListener('ended', handleEnded)
     }
   }, [currentSongId])
 
@@ -123,6 +137,9 @@ export const useAudioPlayer = (
       // keep current volume
       audio.volume = volume
       audio.load()
+      if (audioSliderRef.current) {
+        audioSliderRef.current.value = '0'
+      }
     }
 
     const hasQueryToken = /\btoken=/.test(songPath)
@@ -316,6 +333,7 @@ export const useAudioPlayer = (
     volume,
     volumeIcon,
     audioSliderRef,
+    modalAudioSliderRef, // Include new ref
     volumeSliderRef,
     handleSliderChange,
     handleVolumeChange,

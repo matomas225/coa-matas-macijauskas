@@ -187,18 +187,6 @@ export const SongsCarousel: React.FC<SongsCarouselProps> = ({
     }
   }, [animationId])
 
-  // Auto-scroll to show scrollbar on mount
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = 1
-      setTimeout(() => {
-        if (carouselRef.current) {
-          carouselRef.current.scrollLeft = 0
-        }
-      }, 100)
-    }
-  }, [songs])
-
   return (
     <div className="songs-carousel-wrapper">
       <div

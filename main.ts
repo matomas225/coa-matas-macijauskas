@@ -22,7 +22,7 @@ const createWindow = () => {
     event.preventDefault()
 
     // Show confirmation dialog
-    const response = dialog.showMessageBoxSync(mainWindow, {
+    const response = dialog.showMessageBoxSync({
       type: 'warning',
       buttons: ['Cancel', 'Close'],
       defaultId: 1,

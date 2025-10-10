@@ -1,5 +1,5 @@
-import "./AlbumCard.scss";
-import { Button } from "../elements/Button";
+import './AlbumCard.scss'
+import { Button } from '../elements/Button'
 
 export const AlbumCard = ({ album, onClick }: any) => {
   return (
@@ -8,15 +8,14 @@ export const AlbumCard = ({ album, onClick }: any) => {
         src={
           album.coverImagePath
             ? `${album.coverImagePath}`
-            : "/src/assets/placeholder-album.png"
+            : '/src/assets/placeholder-album.png'
         }
         alt={album.title}
         className="album-cover"
       />
       <h2>{album.title}</h2>
       <p>{album.artist}</p>
-      <p>{album._id}</p>
       <Button type="button">Manage Album Songs</Button>
     </div>
-  );
-};
+  )
+}
