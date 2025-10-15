@@ -1,16 +1,16 @@
 /// <reference types="vitest/config" />
 
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      "@utils": path.resolve(__dirname, "src/utils"),
-      "@elements": path.resolve(__dirname, "src/components/elements"),
+      '@': path.resolve(__dirname, 'src'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@elements': path.resolve(__dirname, 'src/components/elements'),
     },
   },
   plugins: [react()],
@@ -23,7 +23,7 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: "./vitest.setup.ts",
+    environment: 'jsdom',
+    setupFiles: './vitest.setup.ts',
   },
-});
+})
