@@ -1,29 +1,29 @@
-import React, { useRef } from "react";
-import NavItem from "./NavItem";
-import { routes } from "@utils/routes";
-import Logo from "@/assets/logo-white.svg";
-import "./Navigation.scss";
-import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "@/hooks/reduxHooks";
-import { ProfilePopup } from "../ProfilePopup/ProfilePopup";
-import { setProfilePopup } from "../ProfilePopup/profilePopupSlice";
-import { useLogin } from "@/hooks/useLogin";
+import React, { useRef } from 'react'
+import NavItem from './NavItem'
+import { routes } from '@utils/routes'
+import Logo from '@/assets/logo-white.svg'
+import './Navigation.scss'
+import { NavLink } from 'react-router-dom'
+import { useAppDispatch } from '@/hooks/reduxHooks'
+import { ProfilePopup } from '../ProfilePopup/ProfilePopup'
+import { setProfilePopup } from '../ProfilePopup/profilePopupSlice'
+import { useLogin } from '@/hooks/useLogin'
 
 const Navigation: React.FC = () => {
-  const { user } = useLogin();
+  const { user } = useLogin()
 
-  const ref = useRef<HTMLLIElement>(null);
+  const ref = useRef<HTMLLIElement>(null)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const navigationItems = user
     ? [
         {
           route: routes.home,
-          name: "Home",
+          name: 'Home',
         },
         {
-          route: "#",
+          route: '#',
           name: user.username,
           containerRef: ref,
           onClick: () => dispatch(setProfilePopup()),
@@ -32,19 +32,19 @@ const Navigation: React.FC = () => {
       ]
     : [
         {
-          route: routes.home,
-          name: "Home",
+          route: routes.landing,
+          name: 'Home',
         },
         {
           route: routes.auth,
-          name: "Login",
+          name: 'Login',
         },
-      ];
+      ]
 
   return (
     <header>
       <nav>
-        <NavLink to={routes.home}>
+        <NavLink to={user ? routes.home : routes.landing}>
           <img src={Logo} alt="logo" />
         </NavLink>
         <ul>
@@ -61,7 +61,7 @@ const Navigation: React.FC = () => {
         </ul>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation
