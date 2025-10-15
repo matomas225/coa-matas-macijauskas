@@ -1,0 +1,358 @@
+@use '@/styles/variables' as *;
+
+.landing-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    $bgDark 0%,
+    adjust-color($bgDark, $lightness: 5%) 100%
+  );
+  color: $textPrimary;
+}
+
+// Hero Section
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      $accentColor 0%,
+      adjust-color($accentColor, $lightness: 20%) 50%,
+      $bgDark 100%
+    );
+    opacity: 0.9;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+
+    .hero-title {
+      margin: 0 0 1.5rem 0;
+      font-size: 4rem;
+      font-family: 'circular-bold';
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 3rem 0;
+      font-size: 1.5rem;
+      font-family: 'circular-medium';
+      color: rgba(white, 0.9);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      background: linear-gradient(
+        135deg,
+        $accentColor 0%,
+        $accentColorDarker 100%
+      );
+      color: white;
+      border: none;
+      padding: 1.2rem 2.5rem;
+      font-size: 1.2rem;
+      font-family: 'circular-bold';
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba($accentColor, 0.4);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(white, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      &:hover {
+        background: linear-gradient(
+          135deg,
+          $accentColorDarker 0%,
+          adjust-color($accentColorDarker, $lightness: -10%) 100%
+        );
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba($accentColor, 0.6);
+
+        &::before {
+          left: 100%;
+        }
+      }
+
+      &:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba($accentColor, 0.4);
+      }
+    }
+  }
+}
+
+// Features Section
+.features {
+  padding: 5rem 0;
+  background: $bgGrey;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'circular-bold';
+    color: $textPrimary;
+    margin-bottom: 3rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: $bgDark;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-family: 'circular-bold';
+      color: $accentColor;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: $textGrey;
+      line-height: 1.6;
+    }
+  }
+}
+
+// CTA Section
+.cta-section {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, $bgDark 0%, $accentColor 100%);
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    font-family: 'circular-bold';
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: rgba(white, 0.8);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(white, 0.1);
+    border-radius: 16px;
+    padding: 5px 10px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(white, 0.2),
+        transparent
+      );
+      transition: left 0.5s;
+    }
+
+    &:hover {
+      background: white;
+      color: $bgDark;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(white, 0.3);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(white, 0.2);
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .hero .hero-content .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .features .section-title {
+    font-size: 2rem;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 90vh;
+
+    .hero-content {
+      padding: 0 1rem;
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .features {
+    padding: 3rem 0;
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      padding: 1.5rem;
+    }
+  }
+
+  .cta-section {
+    padding: 3rem 0;
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Disclaimer Section
+.disclaimer {
+  padding: 2rem 0;
+  background: $bgGrey;
+  border-top: 1px solid $borderGrey;
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: $textGrey;
+    line-height: 1.5;
+    font-family: 'circular-medium';
+  }
+}
+
+// Responsive Design for Disclaimer
+@media (max-width: 768px) {
+  .disclaimer {
+    padding: 1.5rem 0;
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .disclaimer {
+    padding: 1rem 0;
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
+}
