@@ -1,48 +1,105 @@
-# CodeAcadey | MATAS MACIJAUSKAS
+# Soundify
 
-## How to run the project.
+Soundify is a modern music player application built with React and TypeScript. It provides a platform for users to manage their playlists, play music, and enjoy a seamless audio experience. This project is designed to be a scalable and robust music application, leveraging a powerful tech stack to deliver high performance and a rich user interface.
 
-1. install the packages
-   `npm install`
-2. run the project
-   `npm run dev`
+## Features
 
-## The Stack.
+- **User Authentication**: Secure login and registration system.
+- **Playlist Management**: Create, update, and delete playlists.
+- **Music Playback**: A fully functional audio player with controls for play, pause, skip, and volume adjustment.
+- **Song Management**: Upload, edit, and organize songs within albums.
+- **Album Organization**: Group songs into albums for better organization.
+- **Responsive Design**: A mobile-first design that ensures a great user experience across all devices.
 
-- `React`
-- `TypeScript`
-- `Vite`
-- `Jest`
-- `SCSS (SASS)`
-- `Redux`
-- `React-Router`
-- `Eslint`
+## Tech Stack
 
-## Project Plan
+- **Frontend**: React, TypeScript, Vite, Redux, React Router
+- **Styling**: SCSS, Sass
+- **Testing**: Vitest, React Testing Library
+- **Linting**: ESLint, Prettier
+- **Internationalization**: i18next
+- **Backend**: Node.js, Express, MongoDB, JWT
 
-1. **Build Music Player UI.**
-2. **Build Back end with:**
+## Getting Started
 
-- `NodeJs and Express`
-- `MongoDb`
-- `JWT auth`
+To get a local copy up and running, follow these simple steps.
 
-3. **Integrate Music API** `YouTube API`.
+### Prerequisites
 
-<sub>NOTE: for youtube API maybe need to to use OAuth 2.0</sub>
+- Node.js (v18 or later)
+- npm
 
-[Youtube DOCS](https://developers.google.com/youtube/v3/quickstart/js)
+### Installation
 
-4. **Also Have Local Music Files**
+1. Clone the repo
 
-5. **Login/Register functionality.**
-6. **User can make playlists.**
-7. **User can like the music.**
-8. **Admin can manage users, songs, everything basicly.**
-9. **Impliment graphs for music overwiev (needs more thinking).**
-10. **Add more stuff with time.**
+   ```sh
+   git clone https://github.com/matomas225/coa-matas-macijauskas.git
+   ```
 
-## TODO:
+2. Install NPM packages
 
-maybe implement redux play/pause/next songs functions
-useAppSelector
+   ```sh
+   npm install
+   ```
+
+### Running the Application
+
+To run the application in development mode, use the following command:
+
+```sh
+npm run dev
+```
+
+This will start the development server, and you can view the application at `http://localhost:5173`.
+
+## Available Scripts
+
+- `npm run dev`: Runs the app in the development mode.
+- `npm run build`: Builds the app for production to the `dist` folder.
+- `npm run preview`: Serves the production build locally for preview.
+- `npm run test`: Launches the test runner in the interactive watch mode.
+- `npm run coverage`: Generates a test coverage report.
+- `npm run lint`: Lints the codebase using ESLint.
+
+## Testing
+
+This project uses Vitest and React Testing Library for testing. To run the tests, use the following command:
+
+```sh
+npm run test
+```
+
+To generate a test coverage report, run:
+
+```sh
+npm run coverage
+```
+
+## Project Structure
+
+The project follows a standard React project structure, with all the source code located in the `src` directory.
+
+```
+/src
+|-- assets
+|-- components
+|-- hooks
+|-- locales
+|-- pages
+|-- services
+|-- state
+|-- styles
+|-- utils
+```
+
+- **`assets`**: Contains static assets like images, fonts, etc.
+- **`components`**: Contains reusable React components.
+- **`hooks`**: Contains custom React hooks.
+- **`locales`**: Contains translation files for internationalization.
+- **`pages`**: Contains the main pages of the application.
+- **`services`**: Contains API-related services.
+- **`state`**: Contains Redux store and slice definitions.
+- **`styles`**: Contains global styles, variables, and mixins.
+- **`utils`**: Contains utility functions.
+
