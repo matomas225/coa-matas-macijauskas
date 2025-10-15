@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBackward,
   faForward,
-  faTimes,
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons'
 import { useAudioPlayer } from './useAudioPlayer'
@@ -35,7 +34,12 @@ export const AudioPlayer: React.FC = () => {
     volumeSliderRef,
     handleSliderChange,
     handleVolumeChange,
-  } = useAudioPlayer(currentSongData?.songPath || '', isPlaying, currentSongId, handleNextSong)
+  } = useAudioPlayer(
+    currentSongData?.songPath || '',
+    isPlaying,
+    currentSongId,
+    handleNextSong,
+  )
 
   // Only render when a track is actually selected and available
   if (!currentSongId || !currentSongData) return null
