@@ -1,6 +1,7 @@
 export const routes = {
-  home: "/",
-  auth: "/auth",
-  profile: "/profile",
-  album: "/album",
-};
+  landing: '/',
+  home: '/home',
+  auth: '/auth',
+  profile: '/profile',
+  album: '/album',
+}
