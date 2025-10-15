@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  BrowserRouter,
+  HashRouter as Router,
   Navigate,
   Route,
   Routes,
@@ -11,6 +11,7 @@ import Navigation from '@/components/Navigation/Navigation'
 import NotFound from '@/pages/NotFound/NotFound'
 import Home from '@/pages/Home/Home'
 import Auth from '@/pages/Auth/Auth'
+import LandingPage from '@/pages/LandingPage/LandingPage'
 import { routes } from '@utils/routes'
 import { Profile } from './pages/Profile/Profile'
 import { AudioPlayer } from './components/AudioPlayer/AudioPlayer'
@@ -79,9 +80,10 @@ const AppRoutes: React.FC = () => {
 
   return (
     <Routes>
-      <Route path={routes.home} element={<Home />} />
+      <Route path={routes.landing} element={<LandingPage />} />
       {user ? (
         <>
+          <Route path={routes.home} element={<Home />} />
           <Route path={routes.profile} element={<Profile />} />
           <Route path={routes.auth} element={<Navigate to={routes.home} />} />
           <Route path={routes.album} element={<AlbumPage />} />
@@ -89,6 +91,7 @@ const AppRoutes: React.FC = () => {
       ) : (
         <>
           <Route path={routes.auth} element={<Auth />} />
+          <Route path={routes.home} element={<Navigate to={routes.auth} />} />
         </>
       )}
       <Route path="*" element={<NotFound />} />
@@ -98,7 +101,7 @@ const AppRoutes: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Navigation />
       <AppRoutes />
       <AlbumSidebar />
@@ -116,7 +119,7 @@ const App: React.FC = () => {
         theme="dark"
         transition={Slide}
       />
-    </BrowserRouter>
+    </Router>
   )
 }
 
