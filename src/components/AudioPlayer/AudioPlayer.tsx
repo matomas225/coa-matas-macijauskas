@@ -90,7 +90,7 @@ export const AudioPlayer: React.FC = () => {
                 className="audio-slider"
                 min="0"
                 max={Number.isFinite(duration) && duration > 0 ? duration : 0}
-                defaultValue="0"
+                value={currentTime}
                 onChange={handleSliderChange}
                 step="0.1"
               />
@@ -111,6 +111,7 @@ export const AudioPlayer: React.FC = () => {
             value={volume}
             onChange={handleVolumeChange}
             step="0.1"
+            style={{ ['--volume' as any]: `${volume * 100}%` }}
           />
         </div>
       </div>

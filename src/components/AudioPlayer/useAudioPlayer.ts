@@ -214,15 +214,23 @@ export const useAudioPlayer = (
     }
 
     if (isPlaying) {
-      if (audio.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      if (audio.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
         tryPlay()
       } else {
-        const onLoadedData = () => {
+        const onReady = () => {
+          audio.removeEventListener('loadeddata', onReady)
+          audio.removeEventListener('canplay', onReady)
+          audio.removeEventListener('canplaythrough', onReady)
           if (shouldPlayRef.current) tryPlay()
-          audio.removeEventListener('loadeddata', onLoadedData)
         }
-        audio.addEventListener('loadeddata', onLoadedData)
-        return () => audio.removeEventListener('loadeddata', onLoadedData)
+        audio.addEventListener('loadeddata', onReady)
+        audio.addEventListener('canplay', onReady)
+        audio.addEventListener('canplaythrough', onReady)
+        return () => {
+          audio.removeEventListener('loadeddata', onReady)
+          audio.removeEventListener('canplay', onReady)
+          audio.removeEventListener('canplaythrough', onReady)
+        }
       }
     } else {
       audio.pause()
@@ -257,8 +265,8 @@ export const useAudioPlayer = (
     }
 
     // If we already have some data buffered/ready, try immediately.
-    // HAVE_CURRENT_DATA (2) is less strict than HAVE_FUTURE_DATA (3) and works better cross-browser.
-    if (audio.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+    // HAVE_FUTURE_DATA (3) ensures some future data is buffered to prevent stalling.
+    if (audio.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
       tryPlay()
     } else {
       const onReady = () => {
@@ -315,6 +323,13 @@ export const useAudioPlayer = (
     if (volumeSliderRef.current) {
       volumeSliderRef.current.style.setProperty('--volume', `${percentage}%`)
     }
+
+    // Save to localStorage
+    try {
+      localStorage.setItem('volume', newVolume.toString())
+    } catch {
+      // ignore
+    }
   }
 
   // Reset volume UI when no song selected
@@ -324,6 +339,28 @@ export const useAudioPlayer = (
       setVolume(1)
     }
   }, [songPath])
+
+  // Load volume from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('volume')
+      if (saved) {
+        const vol = parseFloat(saved)
+        if (!isNaN(vol) && vol >= 0 && vol <= 1) {
+          setVolume(vol)
+          if (vol === 0) {
+            setVolumeIcon(faVolumeXmark)
+          } else if (vol < 0.5) {
+            setVolumeIcon(faVolumeLow)
+          } else {
+            setVolumeIcon(faVolumeHigh)
+          }
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }, [])
 
   return {
     token,
