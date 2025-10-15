@@ -1,11 +1,12 @@
 @use '@/styles/variables' as *;
+@use 'sass:color';
 
 .album-page {
   min-height: 100vh;
   background: linear-gradient(
     135deg,
     $bgDark 0%,
-    adjust-color($bgDark, $lightness: 5%) 100%
+    color.adjust($bgDark, $lightness: 5%) 100%
   );
   color: $textPrimary;
 }
@@ -135,7 +136,7 @@
         align-self: center;
 
         &:hover {
-          background: adjust-color($accentColor, $lightness: 10%);
+          background: color.adjust($accentColor, $lightness: 10%);
           transform: translateY(-2px);
           box-shadow:
             0 6px 20px rgba($accentColor, 0.4),
@@ -183,7 +184,7 @@
       box-shadow: 0 4px 15px rgba($accentColor, 0.3);
 
       &:hover {
-        background: adjust-color($accentColor, $lightness: 10%);
+        background: color.adjust($accentColor, $lightness: 10%);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba($accentColor, 0.4);
       }
@@ -207,7 +208,7 @@
   border: 1px solid transparent;
 
   &:hover {
-    background: adjust-color($bgGrey, $lightness: 3%);
+    background: color.adjust($bgGrey, $lightness: 3%);
     border-color: $accentColor;
     transform: translateX(4px);
   }

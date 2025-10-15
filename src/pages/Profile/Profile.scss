@@ -1,11 +1,12 @@
 @use '@/styles/variables' as *;
+@use 'sass:color';
 
 .profile-page {
   min-height: 100vh;
   background: linear-gradient(
     135deg,
     $bgDark 0%,
-    adjust-color($bgDark, $lightness: 5%) 100%
+    color.adjust($bgDark, $lightness: 5%) 100%
   );
   color: $textPrimary;
 }
@@ -26,7 +27,7 @@
     background: linear-gradient(
       135deg,
       $accentColor 0%,
-      adjust-color($accentColor, $lightness: 20%) 50%,
+      color.adjust($accentColor, $lightness: 20%) 50%,
       $bgDark 100%
     );
     opacity: 0.8;

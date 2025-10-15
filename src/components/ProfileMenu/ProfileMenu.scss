@@ -1,4 +1,5 @@
 @use '@/styles/variables' as *;
+@use 'sass:color';
 
 .profile-menu {
   box-sizing: border-box;
@@ -68,7 +69,7 @@
     box-shadow: 0 4px 15px rgba($accentColor, 0.3);
 
     &:hover {
-      background: adjust-color($accentColor, $lightness: 10%);
+      background: color.adjust($accentColor, $lightness: 10%);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba($accentColor, 0.4);
     }
